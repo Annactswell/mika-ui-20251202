@@ -75,6 +75,7 @@
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center space-x-8 font-bold text-lg">
+                    <a href="templates.html" class="hover:text-jungle-green hover:underline decoration-4 decoration-jungle-green underline-offset-4">Templates</a>
                     <a href="gallery.html" class="hover:text-jungle-green hover:underline decoration-4 decoration-jungle-green underline-offset-4">Gallery</a>
                     <a href="models.html" class="hover:text-jungle-green hover:underline decoration-4 decoration-jungle-green underline-offset-4">Models</a>
                     <a href="challenges.html" class="hover:text-jungle-green hover:underline decoration-4 decoration-jungle-green underline-offset-4">Challenges</a>
@@ -110,6 +111,7 @@
                 <a href="#auth" class="block px-4 py-2 font-bold hover:bg-acid-yellow border-2 border-transparent hover:border-black rounded-lg transition-all mb-1">Authentication</a>
                 
                 <div class="px-4 py-2 mt-4 mb-2 text-xs font-bold uppercase text-gray-500">Endpoints</div>
+                <a href="#models" class="block px-4 py-2 font-bold hover:bg-acid-yellow border-2 border-transparent hover:border-black rounded-lg transition-all mb-1">List Models</a>
                 <a href="#generate" class="block px-4 py-2 font-bold hover:bg-acid-yellow border-2 border-transparent hover:border-black rounded-lg transition-all mb-1">Generate Image</a>
                 <a href="#status" class="block px-4 py-2 font-bold hover:bg-acid-yellow border-2 border-transparent hover:border-black rounded-lg transition-all mb-1">Check Status</a>
                 <a href="#upscale" class="block px-4 py-2 font-bold hover:bg-acid-yellow border-2 border-transparent hover:border-black rounded-lg transition-all mb-1">Upscale</a>
@@ -158,6 +160,41 @@
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{ ... }'</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- List Models -->
+            <section id="models" class="mb-16 pt-12 border-t-4 border-black">
+                <div class="flex items-center gap-4 mb-6">
+                    <span class="bg-blue-600 text-white px-3 py-1 font-bold font-mono text-sm border-2 border-black shadow-hard-hover rounded">GET</span>
+                    <h2 class="font-display text-4xl">/models</h2>
+                </div>
+                <p class="font-bold text-gray-600 mb-6">Retrieve a list of available models.</p>
+
+                <!-- Response Example -->
+                <h3 class="font-display text-2xl mb-4">Response</h3>
+                <div class="code-block rounded-xl border-4 border-black overflow-hidden shadow-hard">
+                    <div class="p-6 overflow-x-auto">
+<pre><code class="language-json">{
+  "data": [
+    {
+      "id": "mika-v5",
+      "name": "Mika V5 (Realism)",
+      "status": "active"
+    },
+    {
+      "id": "anime-mix-xl",
+      "name": "Anime Mix XL",
+      "status": "active"
+    },
+    {
+      "id": "poly-3d",
+      "name": "Poly Perfect 3D",
+      "status": "active"
+    }
+  ]
+}</code></pre>
                     </div>
                 </div>
             </section>
@@ -242,7 +279,93 @@
                 </div>
             </section>
 
-            <!-- Footer in Main (Optional, or keep global footer) -->
+            <!-- Upscale -->
+            <section id="upscale" class="mb-16 pt-12 border-t-4 border-black">
+                <div class="flex items-center gap-4 mb-6">
+                    <span class="bg-jungle-green text-acid-yellow px-3 py-1 font-bold font-mono text-sm border-2 border-black shadow-hard-hover rounded">POST</span>
+                    <h2 class="font-display text-4xl">/upscale</h2>
+                </div>
+                <p class="font-bold text-gray-600 mb-6">Upscale an existing image to higher resolution.</p>
+
+                <!-- Params Table -->
+                <div class="bg-white border-4 border-black rounded-xl overflow-hidden mb-8 shadow-hard">
+                    <table class="w-full text-left">
+                        <thead class="bg-gray-100 border-b-4 border-black">
+                            <tr>
+                                <th class="p-4 font-bold font-display">Parameter</th>
+                                <th class="p-4 font-bold font-display">Type</th>
+                                <th class="p-4 font-bold font-display">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody class="font-mono text-sm">
+                            <tr class="border-b border-gray-300">
+                                <td class="p-4 font-bold">image_url</td>
+                                <td class="p-4 text-blue-600">string</td>
+                                <td class="p-4 font-body font-bold text-gray-600">URL of the source image.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 font-bold">scale</td>
+                                <td class="p-4 text-blue-600">integer</td>
+                                <td class="p-4 font-body font-bold text-gray-600">Scale factor (2 or 4). Default: 2.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Response Example -->
+                <h3 class="font-display text-2xl mb-4">Response</h3>
+                <div class="code-block rounded-xl border-4 border-black overflow-hidden shadow-hard">
+                    <div class="p-6 overflow-x-auto">
+<pre><code class="language-json">{
+  "id": "task_upscale_987",
+  "status": "processing",
+  "eta": 5.0
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Errors -->
+            <section id="errors" class="mb-16 pt-12 border-t-4 border-black">
+                <h2 class="font-display text-4xl mb-6">Errors</h2>
+                <p class="font-bold text-gray-600 mb-6">
+                    Mika uses standard HTTP status codes to indicate success or failure.
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-red-50 border-2 border-red-500 p-4 rounded-xl">
+                        <h3 class="font-bold text-red-600 text-lg mb-1">400 Bad Request</h3>
+                        <p class="text-sm font-bold text-gray-600">Invalid parameters or malformed JSON.</p>
+                    </div>
+                    <div class="bg-red-50 border-2 border-red-500 p-4 rounded-xl">
+                        <h3 class="font-bold text-red-600 text-lg mb-1">401 Unauthorized</h3>
+                        <p class="text-sm font-bold text-gray-600">Missing or invalid API key.</p>
+                    </div>
+                    <div class="bg-red-50 border-2 border-red-500 p-4 rounded-xl">
+                        <h3 class="font-bold text-red-600 text-lg mb-1">429 Too Many Requests</h3>
+                        <p class="text-sm font-bold text-gray-600">Rate limit exceeded.</p>
+                    </div>
+                    <div class="bg-red-50 border-2 border-red-500 p-4 rounded-xl">
+                        <h3 class="font-bold text-red-600 text-lg mb-1">500 Server Error</h3>
+                        <p class="text-sm font-bold text-gray-600">Something went wrong on our end.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Rate Limits -->
+            <section id="limits" class="mb-16 pt-12 border-t-4 border-black">
+                <h2 class="font-display text-4xl mb-6">Rate Limits</h2>
+                <div class="bg-white border-4 border-black rounded-xl p-6 shadow-hard">
+                    <div class="flex justify-between items-center border-b-2 border-gray-200 pb-4 mb-4">
+                        <span class="font-bold text-lg">Free Tier</span>
+                        <span class="font-mono font-bold bg-gray-200 px-2 py-1 rounded">10 req/min</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold text-lg">Pro Tier</span>
+                        <span class="font-mono font-bold bg-acid-yellow px-2 py-1 rounded border border-black">60 req/min</span>
+                    </div>
+                </div>
+            </section>
         </main>
     </div>
 
@@ -260,6 +383,7 @@
             <div>
                 <h4 class="font-display text-xl text-acid-yellow mb-4">Explore</h4>
                 <ul class="space-y-2 font-bold text-gray-400">
+                    <li><a href="templates.html" class="hover:text-white">Templates</a></li>
                     <li><a href="gallery.html" class="hover:text-white">Gallery</a></li>
                     <li><a href="pricing.html" class="hover:text-white">Pricing</a></li>
                     <li><a href="api_docs.html" class="text-white">API Docs</a></li>
@@ -315,3 +439,4 @@
     </script>
 </body>
 </html>
+

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mika | Checkout</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;900&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'acid-yellow': '#DFFF00',
+                        'jungle-green': '#00684A',
+                        'soft-cream': '#FFFDF5',
+                        'monster-purple': '#9D4EDD',
+                        'hot-pink': '#FF0099',
+                        'electric-blue': '#4361EE',
+                    },
+                    fontFamily: {
+                        'display': ['"Poppins"', 'sans-serif'],
+                        'body': ['"Inter"', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'hard': '5px 5px 0px 0px #000000',
+                        'hard-hover': '2px 2px 0px 0px #000000',
+                        'card': '8px 8px 0px 0px #000000',
+                        'inner-hard': 'inset 4px 4px 0px 0px #000000',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        ::-webkit-scrollbar { width: 12px; }
+        ::-webkit-scrollbar-track { background: #FFFDF5; border-left: 3px solid black; }
+        ::-webkit-scrollbar-thumb { background: #00684A; border: 3px solid black; }
+        ::-webkit-scrollbar-thumb:hover { background: #DFFF00; }
+
+        .doodle-bg {
+            background-image: radial-gradient(#000 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .brutal-btn { transition: all 0.1s ease; }
+        .brutal-btn:active { transform: translate(4px, 4px); box-shadow: 0px 0px 0px 0px #000000; }
+
+        /* Custom Radio for Payment */
+        .payment-radio:checked + div {
+            border-color: #000;
+            background-color: #DFFF00;
+        }
+        .payment-radio:checked + div .check-circle {
+            background-color: #000;
+            border-color: #000;
+        }
+    </style>
+</head>
+<body class="bg-soft-cream font-body text-black overflow-x-hidden">
+
+    <!-- Top Navigation -->
+    <nav class="fixed w-full top-0 z-50 border-b-4 border-black bg-acid-yellow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center gap-2 cursor-pointer group hover:scale-105 transition-transform">
+                    <span class="font-display text-5xl tracking-widest uppercase italic" style="text-shadow: 4px 4px 0px #FFF;">Mika</span>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8 font-bold text-lg">
+                    <a href="templates.html" class="hover:text-jungle-green hover:underline decoration-4 decoration-jungle-green underline-offset-4">Templates</a>
+                    <a href="gallery.html" class="hover:text-jungle-green hover:underline decoration-4 decoration-jungle-green underline-offset-4">Gallery</a>
+                    <a href="models.html" class="hover:text-jungle-green hover:underline decoration-4 decoration-jungle-green underline-offset-4">Models</a>
+                    <a href="challenges.html" class="hover:text-jungle-green hover:underline decoration-4 decoration-jungle-green underline-offset-4">Challenges</a>
+                    <a href="library.html" class="hover:text-jungle-green hover:underline decoration-4 decoration-jungle-green underline-offset-4">Library</a>
+                    <a href="create.html" class="brutal-btn bg-jungle-green text-acid-yellow px-6 py-2 rounded-full border-2 border-black shadow-hard hover:shadow-hard-hover transform hover:-translate-y-0.5">
+                        Create Now
+                    </a>
+                    <a href="profile.html" class="w-10 h-10 rounded-full bg-monster-purple border-2 border-black overflow-hidden hover:scale-110 transition-transform">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="User" class="w-full h-full object-cover">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-32 pb-20 px-4 max-w-6xl mx-auto">
+        
+        <div class="mb-12 text-center">
+            <h1 class="font-display text-5xl mb-4">Secure Checkout</h1>
+            <p class="font-bold text-gray-500">Complete your purchase to unlock full creative power.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- Left: Payment Details -->
+            <div class="lg:col-span-2 space-y-8">
+                
+                <!-- Billing Info -->
+                <div class="bg-white border-4 border-black rounded-3xl p-8 shadow-card">
+                    <h2 class="font-display text-3xl mb-6 flex items-center gap-3">
+                        <span class="bg-black text-white w-10 h-10 flex items-center justify-center rounded-full text-xl">1</span>
+                        Billing Information
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block font-bold text-sm mb-2">Full Name</label>
+                            <input type="text" value="Felix The Cat" class="w-full p-4 border-4 border-black rounded-xl bg-gray-50 font-bold focus:bg-acid-yellow focus:outline-none transition-colors">
+                        </div>
+                        <div>
+                            <label class="block font-bold text-sm mb-2">Email Address</label>
+                            <input type="email" value="felix@mika.ai" class="w-full p-4 border-4 border-black rounded-xl bg-gray-50 font-bold focus:bg-acid-yellow focus:outline-none transition-colors">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block font-bold text-sm mb-2">Billing Address</label>
+                            <input type="text" placeholder="123 Electric Ave" class="w-full p-4 border-4 border-black rounded-xl bg-gray-50 font-bold focus:bg-acid-yellow focus:outline-none transition-colors mb-4">
+                            <div class="grid grid-cols-2 gap-4">
+                                <input type="text" placeholder="City" class="w-full p-4 border-4 border-black rounded-xl bg-gray-50 font-bold focus:bg-acid-yellow focus:outline-none transition-colors">
+                                <input type="text" placeholder="Postal Code" class="w-full p-4 border-4 border-black rounded-xl bg-gray-50 font-bold focus:bg-acid-yellow focus:outline-none transition-colors">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Method -->
+                <div class="bg-white border-4 border-black rounded-3xl p-8 shadow-card">
+                    <h2 class="font-display text-3xl mb-6 flex items-center gap-3">
+                        <span class="bg-black text-white w-10 h-10 flex items-center justify-center rounded-full text-xl">2</span>
+                        Payment Method
+                    </h2>
+                    
+                    <div class="space-y-4 mb-8">
+                        <!-- Card Option -->
+                        <label class="block cursor-pointer relative">
+                            <input type="radio" name="payment" class="payment-radio hidden" checked>
+                            <div class="border-4 border-black rounded-xl p-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-6 h-6 rounded-full border-4 border-gray-300 check-circle"></div>
+                                    <div class="flex items-center gap-3">
+                                        <i data-lucide="credit-card" class="w-6 h-6"></i>
+                                        <span class="font-bold text-lg">Credit Card</span>
+                                    </div>
+                                </div>
+                                <div class="flex gap-2">
+                                    <div class="w-10 h-6 bg-gray-200 rounded border border-black"></div>
+                                    <div class="w-10 h-6 bg-gray-200 rounded border border-black"></div>
+                                </div>
+                            </div>
+                        </label>
+
+                        <!-- PayPal Option -->
+                        <label class="block cursor-pointer relative">
+                            <input type="radio" name="payment" class="payment-radio hidden">
+                            <div class="border-4 border-black rounded-xl p-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-6 h-6 rounded-full border-4 border-gray-300 check-circle"></div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-bold text-lg italic">PayPal</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <!-- Card Details Form -->
+                    <div class="space-y-6 p-6 bg-gray-50 border-4 border-black rounded-xl border-dashed">
+                        <div>
+                            <label class="block font-bold text-sm mb-2">Card Number</label>
+                            <div class="relative">
+                                <input type="text" placeholder="0000 0000 0000 0000" class="w-full p-4 pl-12 border-4 border-black rounded-xl bg-white font-bold focus:bg-acid-yellow focus:outline-none transition-colors">
+                                <i data-lucide="credit-card" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"></i>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-6">
+                            <div>
+                                <label class="block font-bold text-sm mb-2">Expiry Date</label>
+                                <input type="text" placeholder="MM / YY" class="w-full p-4 border-4 border-black rounded-xl bg-white font-bold focus:bg-acid-yellow focus:outline-none transition-colors">
+                            </div>
+                            <div>
+                                <label class="block font-bold text-sm mb-2">CVC</label>
+                                <input type="text" placeholder="123" class="w-full p-4 border-4 border-black rounded-xl bg-white font-bold focus:bg-acid-yellow focus:outline-none transition-colors">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Right: Order Summary -->
+            <div class="lg:col-span-1">
+                <div class="bg-acid-yellow border-4 border-black rounded-3xl p-8 shadow-card sticky top-32">
+                    <h2 class="font-display text-3xl mb-6">Order Summary</h2>
+                    
+                    <!-- Selected Plan -->
+                    <div class="bg-white border-4 border-black rounded-xl p-4 mb-6 flex justify-between items-center">
+                        <div>
+                            <h3 class="font-display text-xl">Mika Pro</h3>
+                            <p class="text-sm font-bold text-gray-500">Monthly Plan</p>
+                        </div>
+                        <span class="font-display text-xl">$19.00</span>
+                    </div>
+
+                    <!-- Totals -->
+                    <div class="space-y-3 mb-8 border-t-4 border-black pt-6 border-dashed">
+                        <div class="flex justify-between font-bold">
+                            <span>Subtotal</span>
+                            <span>$19.00</span>
+                        </div>
+                        <div class="flex justify-between font-bold text-gray-500">
+                            <span>Tax (Estimated)</span>
+                            <span>$1.90</span>
+                        </div>
+                        <div class="flex justify-between font-display text-2xl pt-4 border-t-2 border-black">
+                            <span>Total</span>
+                            <span>$20.90</span>
+                        </div>
+                    </div>
+
+                    <!-- Guarantee -->
+                    <div class="flex items-start gap-3 mb-8 bg-white/50 p-3 rounded-lg border-2 border-black">
+                        <i data-lucide="shield-check" class="w-5 h-5 shrink-0 mt-0.5"></i>
+                        <p class="text-xs font-bold">Secure 256-bit SSL encryption. 30-day money-back guarantee.</p>
+                    </div>
+
+                    <button class="brutal-btn w-full bg-black text-white py-4 rounded-xl border-4 border-white font-bold text-xl shadow-hard hover:bg-white hover:text-black hover:border-black transition-colors" onclick="processPayment(this)">
+                        Confirm & Pay
+                    </button>
+                    
+                    <p class="text-xs font-bold text-center mt-4 text-gray-600">
+                        By clicking above, you agree to our Terms of Service.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white pt-12 pb-8 border-t-4 border-jungle-green">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+             <a href="index.html" class="inline-flex items-center gap-2 cursor-pointer group hover:scale-105 transition-transform mb-4">
+                <span class="font-display text-4xl uppercase italic text-white" style="text-shadow: 3px 3px 0px #DFFF00;">Mika</span>
+            </a>
+            <div class="text-sm font-bold text-gray-600">
+                &copy; 2023 Mika Inc. Stay Electric.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        function processPayment(btn) {
+            const originalText = btn.innerText;
+            btn.disabled = true;
+            btn.innerHTML = '<i data-lucide="loader" class="w-5 h-5 animate-spin inline-block mr-2"></i> Processing...';
+            lucide.createIcons();
+
+            setTimeout(() => {
+                btn.classList.remove('bg-black', 'text-white', 'border-white');
+                btn.classList.add('bg-jungle-green', 'text-acid-yellow', 'border-black');
+                btn.innerHTML = '<i data-lucide="check" class="w-6 h-6 inline-block mr-2"></i> Paid Successfully!';
+                lucide.createIcons();
+
+                setTimeout(() => {
+                    alert("Welcome to Mika Pro! You are now Electric ⚡");
+                    window.location.href = 'profile.html';
+                }, 1500);
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mika Templates | Jumpstart Creativity</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;900&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'acid-yellow': '#DFFF00',
+                        'jungle-green': '#00684A',
+                        'soft-cream': '#FFFDF5',
+                        'monster-purple': '#9D4EDD',
+                    },
+                    fontFamily: {
+                        'display': ['"Poppins"', 'sans-serif'],
+                        'body': ['"Inter"', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'hard': '5px 5px 0px 0px #000000',
+                        'hard-hover': '2px 2px 0px 0px #000000',
+                        'card': '8px 8px 0px 0px #000000',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        ::-webkit-scrollbar { width: 12px; }
+        ::-webkit-scrollbar-track { background: #FFFDF5; border-left: 3px solid black; }
+        ::-webkit-scrollbar-thumb { background: #00684A; border: 3px solid black; }
+        ::-webkit-scrollbar-thumb:hover { background: #DFFF00; }
+
+        .doodle-bg {
+            background-image: radial-gradient(#000 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .brutal-btn { transition: all 0.1s ease; }
+        .brutal-btn:active { transform: translate(4px, 4px); box-shadow: 0px 0px 0px 0px #000000; }
+        
+        .template-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .template-card:hover { transform: translateY(-8px); box-shadow: 12px 12px 0px 0px #000000; z-index: 10; }
+    </style>
+</head>
+<body class="bg-soft-cream font-body text-black overflow-x-hidden">
+
+    <!-- Top Navigation -->
+    <nav class="fixed w-full top-0 z-50 border-b-4 border-black bg-acid-yellow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center gap-2 cursor-pointer group hover:scale-105 transition-transform">
+                    <span class="font-display text-5xl tracking-widest uppercase italic" style="text-shadow: 4px 4px 0px #FFF;">Mika</span>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8 font-bold text-lg">
+                    <a href="templates.html" class="text-jungle-green underline decoration-4 decoration-jungle-green underline-offset-4">Templates</a>
+                    <a href="gallery.html" class="hover:text-jungle-green hover:underline decoration-4 decoration-jungle-green underline-offset-4">Gallery</a>
+                    <a href="models.html" class="hover:text-jungle-green hover:underline decoration-4 decoration-jungle-green underline-offset-4">Models</a>
+                    <a href="challenges.html" class="hover:text-jungle-green hover:underline decoration-4 decoration-jungle-green underline-offset-4">Challenges</a>
+                    <a href="library.html" class="hover:text-jungle-green hover:underline decoration-4 decoration-jungle-green underline-offset-4">Library</a>
+                    <a href="create.html" class="brutal-btn bg-jungle-green text-acid-yellow px-6 py-2 rounded-full border-2 border-black shadow-hard hover:shadow-hard-hover transform hover:-translate-y-0.5">
+                        Create Now
+                    </a>
+                    <a href="profile.html" class="w-10 h-10 rounded-full bg-monster-purple border-2 border-black overflow-hidden hover:scale-110 transition-transform">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="User" class="w-full h-full object-cover">
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button class="p-2 border-2 border-black bg-white shadow-hard rounded-md">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Templates Header -->
+    <header class="pt-32 pb-12 px-4 relative doodle-bg border-b-4 border-black">
+        <div class="max-w-7xl mx-auto text-center">
+            <div class="inline-block bg-monster-purple text-white px-6 py-2 rounded-full font-bold text-lg border-4 border-black transform rotate-2 mb-6 animate__animated animate__bounceIn">
+                🚀 Jumpstart Creativity
+            </div>
+            <h1 class="font-display text-6xl md:text-8xl mb-6 animate__animated animate__fadeInDown">
+                Template <span class="text-acid-yellow bg-black px-4 inline-block transform -rotate-2">Square</span>
+            </h1>
+            <p class="text-xl font-bold text-gray-800 max-w-2xl mx-auto animate__animated animate__fadeInUp">
+                Don't start from zero. Pick a template, tweak the prompt, and create magic in seconds.
+            </p>
+
+            <!-- Search & Filter Bar -->
+            <div class="mt-10 max-w-3xl mx-auto space-y-6 animate__animated animate__fadeInUp animate__delay-1s">
+                <!-- Search -->
+                <div class="relative">
+                    <input type="text" placeholder="Search templates (e.g., 'Cyberpunk Avatar', 'Logo Design')..." class="w-full p-4 pl-12 font-bold border-4 border-black rounded-xl shadow-hard focus:outline-none focus:shadow-hard-hover transition-shadow bg-white text-lg">
+                    <i data-lucide="search" class="absolute left-4 top-1/2 transform -translate-y-1/2 w-6 h-6 text-gray-400"></i>
+                </div>
+
+                <!-- Categories -->
+                <div class="flex flex-wrap justify-center gap-3">
+                    <button class="brutal-btn bg-black text-white border-2 border-black px-4 py-1 rounded-full font-bold shadow-hard hover:shadow-hard-hover">All</button>
+                    <button class="brutal-btn bg-white text-black border-2 border-black px-4 py-1 rounded-full font-bold shadow-hard hover:bg-acid-yellow hover:shadow-hard-hover">Social Media</button>
+                    <button class="brutal-btn bg-white text-black border-2 border-black px-4 py-1 rounded-full font-bold shadow-hard hover:bg-jungle-green hover:text-acid-yellow hover:shadow-hard-hover">Portraits</button>
+                    <button class="brutal-btn bg-white text-black border-2 border-black px-4 py-1 rounded-full font-bold shadow-hard hover:bg-monster-purple hover:text-white hover:shadow-hard-hover">Anime</button>
+                    <button class="brutal-btn bg-white text-black border-2 border-black px-4 py-1 rounded-full font-bold shadow-hard hover:bg-acid-yellow hover:shadow-hard-hover">Marketing</button>
+                    <button class="brutal-btn bg-white text-black border-2 border-black px-4 py-1 rounded-full font-bold shadow-hard hover:bg-acid-yellow hover:shadow-hard-hover">Memes</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Templates Grid -->
+    <section class="py-16 px-4 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- Template 1 -->
+            <div class="template-card bg-white border-4 border-black rounded-2xl p-4 relative flex flex-col">
+                <div class="w-full h-48 bg-gray-200 rounded-xl border-2 border-black overflow-hidden mb-4 relative">
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Template" class="w-full h-full object-cover">
+                    <div class="absolute bottom-0 left-0 bg-acid-yellow border-t-2 border-r-2 border-black px-3 py-1 font-bold text-xs">
+                        Anime Style
+                    </div>
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-display text-2xl mb-1">Neon Cyber-Samurai</h3>
+                    <p class="text-sm text-gray-600 font-bold mb-4 line-clamp-2">Perfect for creating futuristic warrior avatars with glowing neon accents.</p>
+                    <div class="flex items-center gap-2 text-xs font-bold text-gray-400 mb-4">
+                        <i data-lucide="download" class="w-4 h-4"></i> Used 1.2k times
+                        <span class="mx-1">•</span>
+                        <span>@cyberking</span>
+                    </div>
+                </div>
+                <button onclick="window.location.href='create.html?template=neon-samurai'" class="w-full brutal-btn bg-jungle-green text-acid-yellow border-2 border-black py-3 rounded-xl font-bold text-lg shadow-hard hover:bg-black hover:text-white flex items-center justify-center gap-2">
+                    <i data-lucide="zap" class="w-5 h-5"></i> Use Template
+                </button>
+            </div>
+
+            <!-- Template 2 -->
+            <div class="template-card bg-soft-cream border-4 border-black rounded-2xl p-4 relative flex flex-col">
+                <div class="w-full h-48 bg-gray-200 rounded-xl border-2 border-black overflow-hidden mb-4 relative">
+                    <img src="https://images.unsplash.com/photo-1563089145-599997674d42?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Template" class="w-full h-full object-cover">
+                    <div class="absolute bottom-0 left-0 bg-monster-purple text-white border-t-2 border-r-2 border-black px-3 py-1 font-bold text-xs">
+                        Portrait
+                    </div>
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-display text-2xl mb-1">Cinematic Glow</h3>
+                    <p class="text-sm text-gray-600 font-bold mb-4 line-clamp-2">High contrast, cinematic lighting for dramatic portraits. Great for LinkedIn or social.</p>
+                    <div class="flex items-center gap-2 text-xs font-bold text-gray-400 mb-4">
+                        <i data-lucide="download" class="w-4 h-4"></i> Used 850 times
+                        <span class="mx-1">•</span>
+                        <span>@lightmaster</span>
+                    </div>
+                </div>
+                <button onclick="window.location.href='create.html?template=cinematic-glow'" class="w-full brutal-btn bg-white text-black border-2 border-black py-3 rounded-xl font-bold text-lg shadow-hard hover:bg-acid-yellow flex items-center justify-center gap-2">
+                    <i data-lucide="zap" class="w-5 h-5"></i> Use Template
+                </button>
+            </div>
+
+            <!-- Template 3 -->
+            <div class="template-card bg-white border-4 border-black rounded-2xl p-4 relative flex flex-col">
+                <div class="w-full h-48 bg-gray-200 rounded-xl border-2 border-black overflow-hidden mb-4 relative">
+                    <img src="https://images.unsplash.com/photo-1627398242450-270171b9e7f9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Template" class="w-full h-full object-cover">
+                    <div class="absolute bottom-0 left-0 bg-acid-yellow border-t-2 border-r-2 border-black px-3 py-1 font-bold text-xs">
+                        Product
+                    </div>
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-display text-2xl mb-1">Minimalist Product</h3>
+                    <p class="text-sm text-gray-600 font-bold mb-4 line-clamp-2">Clean studio background with soft shadows. Ideal for e-commerce product shots.</p>
+                    <div class="flex items-center gap-2 text-xs font-bold text-gray-400 mb-4">
+                        <i data-lucide="download" class="w-4 h-4"></i> Used 2.3k times
+                        <span class="mx-1">•</span>
+                        <span>@shop_ai</span>
+                    </div>
+                </div>
+                <button onclick="window.location.href='create.html?template=minimalist-product'" class="w-full brutal-btn bg-white text-black border-2 border-black py-3 rounded-xl font-bold text-lg shadow-hard hover:bg-acid-yellow flex items-center justify-center gap-2">
+                    <i data-lucide="zap" class="w-5 h-5"></i> Use Template
+                </button>
+            </div>
+
+            <!-- Template 4 -->
+            <div class="template-card bg-white border-4 border-black rounded-2xl p-4 relative flex flex-col">
+                <div class="w-full h-48 bg-gray-200 rounded-xl border-2 border-black overflow-hidden mb-4 relative">
+                    <img src="https://images.unsplash.com/photo-1634152962476-4b8a00e1915c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Template" class="w-full h-full object-cover">
+                    <div class="absolute bottom-0 left-0 bg-jungle-green text-acid-yellow border-t-2 border-r-2 border-black px-3 py-1 font-bold text-xs">
+                        3D Icon
+                    </div>
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-display text-2xl mb-1">Claymorphism Icon</h3>
+                    <p class="text-sm text-gray-600 font-bold mb-4 line-clamp-2">Cute, squishy 3D clay style icons for app designs and presentations.</p>
+                    <div class="flex items-center gap-2 text-xs font-bold text-gray-400 mb-4">
+                        <i data-lucide="download" class="w-4 h-4"></i> Used 5.1k times
+                        <span class="mx-1">•</span>
+                        <span>@icon_wizard</span>
+                    </div>
+                </div>
+                <button onclick="window.location.href='create.html?template=clay-icon'" class="w-full brutal-btn bg-white text-black border-2 border-black py-3 rounded-xl font-bold text-lg shadow-hard hover:bg-acid-yellow flex items-center justify-center gap-2">
+                    <i data-lucide="zap" class="w-5 h-5"></i> Use Template
+                </button>
+            </div>
+
+            <!-- Template 5 -->
+            <div class="template-card bg-white border-4 border-black rounded-2xl p-4 relative flex flex-col">
+                <div class="w-full h-48 bg-gray-200 rounded-xl border-2 border-black overflow-hidden mb-4 relative">
+                    <img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Template" class="w-full h-full object-cover">
+                    <div class="absolute bottom-0 left-0 bg-monster-purple text-white border-t-2 border-r-2 border-black px-3 py-1 font-bold text-xs">
+                        Abstract
+                    </div>
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-display text-2xl mb-1">Fluid Abstract</h3>
+                    <p class="text-sm text-gray-600 font-bold mb-4 line-clamp-2">Swirling colors and organic shapes for modern wallpapers and art prints.</p>
+                    <div class="flex items-center gap-2 text-xs font-bold text-gray-400 mb-4">
+                        <i data-lucide="download" class="w-4 h-4"></i> Used 300 times
+                        <span class="mx-1">•</span>
+                        <span>@art_flow</span>
+                    </div>
+                </div>
+                <button onclick="window.location.href='create.html?template=fluid-abstract'" class="w-full brutal-btn bg-white text-black border-2 border-black py-3 rounded-xl font-bold text-lg shadow-hard hover:bg-acid-yellow flex items-center justify-center gap-2">
+                    <i data-lucide="zap" class="w-5 h-5"></i> Use Template
+                </button>
+            </div>
+
+            <!-- Template 6 (Promo) -->
+            <div class="template-card bg-acid-yellow border-4 border-black rounded-2xl p-4 relative flex flex-col justify-center items-center text-center">
+                <div class="w-20 h-20 bg-black rounded-full flex items-center justify-center mb-4 animate__animated animate__pulse animate__infinite">
+                    <i data-lucide="plus" class="w-10 h-10 text-acid-yellow"></i>
+                </div>
+                <h3 class="font-display text-2xl mb-2">Submit Yours</h3>
+                <p class="text-sm font-bold mb-6">Created a killer prompt? Share it with the community and earn credits.</p>
+                <button class="brutal-btn bg-white text-black border-2 border-black px-6 py-2 rounded-lg font-bold shadow-hard hover:bg-black hover:text-white">
+                    Submit Template
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white pt-16 pb-8 border-t-4 border-jungle-green">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+            <div class="col-span-1 md:col-span-2">
+                <div class="flex items-center gap-2 mb-4">
+                     <span class="font-display text-4xl uppercase italic text-white" style="text-shadow: 3px 3px 0px #DFFF00;">Mika</span>
+                </div>
+                <p class="text-gray-400 font-bold max-w-sm">
+                    We empower everyone to be an artist. Mika is the premier AI creative hub for generation and photo editing. Do not go gentle into that good night—go create!
+                </p>
+            </div>
+            <div>
+                <h4 class="font-display text-xl text-acid-yellow mb-4">Explore</h4>
+                <ul class="space-y-2 font-bold text-gray-400">
+                    <li><a href="templates.html" class="text-white">Templates</a></li>
+                    <li><a href="gallery.html" class="hover:text-white">Gallery</a></li>
+                    <li><a href="pricing.html" class="hover:text-white">Pricing</a></li>
+                    <li><a href="api_docs.html" class="hover:text-white">API Docs</a></li>
+                    <li><a href="blog.html" class="hover:text-white">Blog</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-display text-xl text-acid-yellow mb-4">Links</h4>
+                <div class="flex gap-4">
+                    <a href="#" class="w-10 h-10 bg-white text-black rounded-lg flex items-center justify-center hover:bg-acid-yellow transition-colors">
+                        <i data-lucide="twitter" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white text-black rounded-lg flex items-center justify-center hover:bg-acid-yellow transition-colors">
+                        <i data-lucide="instagram" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white text-black rounded-lg flex items-center justify-center hover:bg-acid-yellow transition-colors">
+                        <i data-lucide="github" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="text-center border-t border-gray-800 pt-8 font-bold text-gray-500">
+            &copy; 2023 Mika Inc. Stay Electric.
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+        
+        // Simple interactive effects
+        document.querySelectorAll('.brutal-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+               // Optional: Add click sound or haptic feedback logic here
+            });
+        });
+
+        // Mobile Menu Toggle Logic
+        document.querySelector('.md\\:hidden button').addEventListener('click', () => {
+            alert("Mobile menu would open here!");
+        });
+    </script>
+</body>
+</html>

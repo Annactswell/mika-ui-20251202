@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10 Tips for Better Prompts | Mika Blog</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;900&family=Inter:wght@400;700;900&family=Fira+Code:wght@400&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'acid-yellow': '#DFFF00',
+                        'jungle-green': '#00684A',
+                        'soft-cream': '#FFFDF5',
+                        'monster-purple': '#9D4EDD',
+                        'hot-pink': '#FF0099',
+                    },
+                    fontFamily: {
+                        'display': ['"Poppins"', 'sans-serif'],
+                        'body': ['"Inter"', 'sans-serif'],
+                        'mono': ['"Fira Code"', 'monospace'],
+                    },
+                    boxShadow: {
+                        'hard': '5px 5px 0px 0px #000000',
+                        'hard-hover': '2px 2px 0px 0px #000000',
+                        'card': '8px 8px 0px 0px #000000',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .doodle-bg {
+            background-image: radial-gradient(#000 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        
+        .brutal-btn { transition: all 0.1s ease; }
+        .brutal-btn:active { transform: translate(4px, 4px); box-shadow: 0px 0px 0px 0px #000000; }
+
+        /* Typography for Blog Content */
+        .prose h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.25rem;
+            font-weight: 900;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+        .prose p {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.125rem;
+            line-height: 1.75;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            color: #333;
+        }
+        .prose blockquote {
+            border-left: 4px solid #DFFF00;
+            background-color: #000;
+            color: #DFFF00;
+            padding: 1.5rem;
+            font-style: italic;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            border-radius: 0 1rem 1rem 0;
+        }
+        .prose ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+        .prose li {
+            margin-bottom: 0.5rem;
+        }
+        .prose strong {
+            color: #00684A;
+        }
+    </style>
+</head>
+<body class="bg-soft-cream font-body text-black overflow-x-hidden">
+
+    <!-- Top Navigation -->
+    <nav class="fixed w-full top-0 z-50 border-b-4 border-black bg-acid-yellow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center gap-2 cursor-pointer group hover:scale-105 transition-transform">
+                    <span class="font-display text-5xl tracking-widest uppercase italic" style="text-shadow: 4px 4px 0px #FFF;">Mika</span>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8 font-bold text-lg">
+                    <a href="blog.html" class="hover:text-jungle-green flex items-center gap-2">
+                        <i data-lucide="arrow-left" class="w-5 h-5"></i> Back to Blog
+                    </a>
+                </div>
+                
+                 <!-- Mobile Menu Button -->
+                 <div class="md:hidden">
+                    <button class="p-2 border-2 border-black bg-white shadow-hard rounded-md">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Progress Bar -->
+    <div class="fixed top-20 left-0 w-full h-2 bg-white z-40 border-b border-black">
+        <div class="h-full bg-jungle-green w-1/3" id="progressBar"></div>
+    </div>
+
+    <article class="pt-32 pb-20">
+        <!-- Article Header -->
+        <div class="max-w-4xl mx-auto px-4 text-center mb-12">
+            <div class="inline-block bg-jungle-green text-acid-yellow px-4 py-1 rounded-full font-bold border-2 border-black mb-6 uppercase tracking-wider text-sm">
+                Tutorials
+            </div>
+            <h1 class="font-display text-5xl md:text-6xl lg:text-7xl mb-8 leading-tight">
+                10 Tips for Better Prompts: Stop Getting Six Fingers
+            </h1>
+            
+            <div class="flex items-center justify-center gap-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-full bg-monster-purple border-2 border-black overflow-hidden">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="User" class="w-full h-full object-cover">
+                    </div>
+                    <div class="text-left">
+                        <div class="font-bold text-lg">Felix</div>
+                        <div class="text-sm font-bold text-gray-500">@felix_art</div>
+                    </div>
+                </div>
+                <div class="h-10 w-0.5 bg-gray-300"></div>
+                <div class="text-left font-bold text-gray-500">
+                    <div>Dec 2, 2025</div>
+                    <div>3 min read</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Featured Image -->
+        <div class="max-w-6xl mx-auto px-4 mb-16">
+            <div class="w-full h-[500px] bg-gray-200 border-4 border-black rounded-3xl overflow-hidden shadow-card relative group">
+                <img src="https://images.unsplash.com/photo-1633113089631-6456cccaadad?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover" alt="Featured Image">
+                <div class="absolute bottom-4 right-4 bg-white border-2 border-black px-3 py-1 rounded text-xs font-bold opacity-75">
+                    Generated with Mika V5
+                </div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="max-w-3xl mx-auto px-4 prose">
+            <p class="lead text-xl font-bold text-black mb-8 border-l-4 border-monster-purple pl-4">
+                We've all been there. You type "beautiful hand holding an apple," and the AI gives you a mutant claw with 7 fingers. Fear not. Here is the definitive guide to prompting like a pro.
+            </p>
+
+            <h2>1. Be Specific with Styles</h2>
+            <p>
+                Don't just say "art". Say <strong>"oil painting by Van Gogh"</strong> or <strong>"cyberpunk digital art, trending on ArtStation"</strong>. The model needs a visual reference point to anchor the generation.
+            </p>
+
+            <blockquote>
+                "Prompting is not about describing the subject. It's about describing the *image* of the subject."
+            </blockquote>
+
+            <h2>2. Negative Prompts are Your Best Friend</h2>
+            <p>
+                Use the <code class="bg-gray-200 border border-black px-1 py-0.5 rounded font-mono text-sm text-red-600">--no</code> parameter or the negative prompt box.
+            </p>
+            <ul>
+                <li><strong>Bad anatomy</strong>: Fixes limbs and faces.</li>
+                <li><strong>Blurry</strong>: Keeps things crisp.</li>
+                <li><strong>Watermark</strong>: Removes accidental text.</li>
+                <li><strong>Mutated hands</strong>: Crucial for portraits.</li>
+            </ul>
+
+            <h2>3. Weighting Matters</h2>
+            <p>
+                If you want more emphasis on a word, use brackets. <code>(cyberpunk:1.2)</code> tells the engine to focus 20% more on that concept. Use this sparingly—too much weight can burn the image.
+            </p>
+
+            <!-- In-article Image -->
+            <div class="my-12">
+                 <div class="bg-acid-yellow border-4 border-black rounded-xl p-2 transform -rotate-1">
+                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Example" class="w-full rounded-lg border-2 border-black">
+                    <p class="text-center font-bold mt-2 text-sm">Example of weighting: (Neon:1.5)</p>
+                 </div>
+            </div>
+
+            <h2>4. Lighting is Everything</h2>
+            <p>
+                Terms like "volumetric lighting," "cinematic lighting," "golden hour," and "studio lighting" dramatically change the mood. Treat the AI like a photographer.
+            </p>
+
+            <hr class="border-2 border-black my-12">
+
+            <div class="bg-soft-cream border-4 border-black rounded-xl p-8 text-center">
+                <h3 class="font-display text-3xl mb-4">Ready to try these out?</h3>
+                <a href="create.html" class="brutal-btn bg-jungle-green text-acid-yellow px-8 py-4 rounded-xl border-4 border-black font-bold text-xl inline-block hover:bg-black shadow-hard">
+                    Open Studio
+                </a>
+            </div>
+        </div>
+    </article>
+
+    <!-- Share Section -->
+    <section class="bg-white border-t-4 border-black py-12">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h3 class="font-display text-2xl mb-6">Share this knowledge</h3>
+            <div class="flex justify-center gap-4">
+                <button class="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center hover:bg-monster-purple transition-colors">
+                    <i data-lucide="twitter" class="w-5 h-5"></i>
+                </button>
+                <button class="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors">
+                    <i data-lucide="facebook" class="w-5 h-5"></i>
+                </button>
+                <button class="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center hover:bg-gray-500 transition-colors">
+                    <i data-lucide="link" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white pt-16 pb-8 border-t-4 border-white">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+            <div class="col-span-1 md:col-span-2">
+                <div class="flex items-center gap-2 mb-4">
+                     <span class="font-display text-4xl uppercase italic text-white" style="text-shadow: 3px 3px 0px #DFFF00;">Mika</span>
+                </div>
+                <p class="text-gray-400 font-bold max-w-sm">
+                    We empower everyone to be an artist. Mika is the premier AI creative hub.
+                </p>
+            </div>
+            <div>
+                <h4 class="font-display text-xl text-acid-yellow mb-4">Explore</h4>
+                <ul class="space-y-2 font-bold text-gray-400">
+                    <li><a href="templates.html" class="hover:text-white">Templates</a></li>
+                    <li><a href="gallery.html" class="hover:text-white">Gallery</a></li>
+                    <li><a href="pricing.html" class="hover:text-white">Pricing</a></li>
+                    <li><a href="api_docs.html" class="hover:text-white">API Docs</a></li>
+                    <li><a href="blog.html" class="text-white">Blog</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-display text-xl text-acid-yellow mb-4">Links</h4>
+                <div class="flex gap-4">
+                    <a href="#" class="w-10 h-10 bg-white text-black rounded-lg flex items-center justify-center hover:bg-acid-yellow transition-colors">
+                        <i data-lucide="twitter" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white text-black rounded-lg flex items-center justify-center hover:bg-acid-yellow transition-colors">
+                        <i data-lucide="instagram" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white text-black rounded-lg flex items-center justify-center hover:bg-acid-yellow transition-colors">
+                        <i data-lucide="github" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="text-center border-t border-gray-800 pt-8 font-bold text-gray-500">
+            &copy; 2023 Mika Inc. Stay Electric.
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Scroll Progress
+        window.onscroll = function() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("progressBar").style.width = scrolled + "%";
+        };
+    </script>
+</body>
+</html>
