@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mika | Login</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;900&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'acid-yellow': '#DFFF00',
+                        'jungle-green': '#00684A',
+                        'soft-cream': '#FFFDF5',
+                        'monster-purple': '#9D4EDD',
+                    },
+                    fontFamily: {
+                        'display': ['"Poppins"', 'sans-serif'],
+                        'body': ['"Inter"', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'hard': '5px 5px 0px 0px #000000',
+                        'hard-hover': '2px 2px 0px 0px #000000',
+                        'card': '8px 8px 0px 0px #000000',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .doodle-bg {
+            background-image: radial-gradient(#000 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .brutal-btn { transition: all 0.1s ease; }
+        .brutal-btn:active { transform: translate(4px, 4px); box-shadow: 0px 0px 0px 0px #000000; }
+    </style>
+</head>
+<body class="bg-soft-cream font-body text-black overflow-hidden h-screen flex items-center justify-center relative">
+
+    <!-- Decorative Elements -->
+    <div class="absolute top-0 left-0 w-full h-full doodle-bg opacity-50 z-0 pointer-events-none"></div>
+    
+    <!-- Floating Shapes -->
+    <div class="absolute top-20 left-20 w-32 h-32 bg-acid-yellow border-4 border-black rounded-full animate__animated animate__bounceIn animate__delay-1s z-0"></div>
+    <div class="absolute bottom-20 right-20 w-48 h-48 bg-monster-purple border-4 border-black transform rotate-12 animate__animated animate__bounceIn animate__delay-2s z-0"></div>
+
+    <!-- Login Card -->
+    <div class="relative z-10 bg-white border-4 border-black rounded-3xl shadow-card max-w-md w-full p-8 md:p-12 animate__animated animate__fadeInUp" id="loginCard">
+        
+        <!-- Logo Header -->
+        <div class="text-center mb-8">
+            <a href="index.html" class="inline-block mb-4 group">
+                <span class="font-display text-5xl tracking-widest uppercase italic text-black group-hover:text-jungle-green transition-colors" style="text-shadow: 3px 3px 0px #DFFF00;">Mika</span>
+            </a>
+            <h1 class="font-display text-3xl">Welcome Back!</h1>
+            <p class="text-gray-500 font-bold">Enter your email to access your studio.</p>
+        </div>
+
+        <!-- Form -->
+        <form class="space-y-6" id="loginForm">
+            <div>
+                <label class="block font-bold text-sm mb-2 uppercase">Email</label>
+                <div class="relative">
+                    <input type="email" required placeholder="you@example.com" class="w-full p-4 pl-12 border-4 border-black rounded-xl font-bold focus:bg-acid-yellow focus:outline-none transition-colors">
+                    <i data-lucide="mail" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"></i>
+                </div>
+            </div>
+
+            <button type="submit" class="brutal-btn w-full bg-black text-white py-4 rounded-xl border-4 border-black font-bold text-xl shadow-hard hover:bg-gray-800 flex items-center justify-center gap-2">
+                Send Magic Link <i data-lucide="sparkles" class="w-5 h-5"></i>
+            </button>
+        </form>
+
+        <!-- Social Login -->
+        <div class="mt-8 pt-6 border-t-4 border-black border-dashed">
+            <p class="text-center font-bold text-gray-500 text-sm mb-4">OR CONTINUE WITH</p>
+            <div class="flex gap-4">
+                <button class="flex-1 bg-white border-2 border-black py-3 rounded-lg font-bold shadow-hard hover:bg-gray-100 flex items-center justify-center gap-2">
+                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5"> Google
+                </button>
+                <button class="flex-1 bg-white border-2 border-black py-3 rounded-lg font-bold shadow-hard hover:bg-gray-100 flex items-center justify-center gap-2">
+                    <i data-lucide="github" class="w-5 h-5"></i> GitHub
+                </button>
+            </div>
+        </div>
+
+        <!-- Footer Link -->
+        <p class="text-center mt-8 font-bold">
+            Don't have an account? 
+            <a href="signup.html" class="text-jungle-green underline decoration-2 hover:bg-acid-yellow px-1">Sign Up</a>
+        </p>
+    </div>
+
+    <!-- Success State (Hidden by default) -->
+    <div class="relative z-10 bg-white border-4 border-black rounded-3xl shadow-card max-w-md w-full p-8 md:p-12 animate__animated animate__fadeIn hidden" id="successCard">
+        <div class="text-center">
+            <div class="w-20 h-20 bg-jungle-green border-4 border-black rounded-full flex items-center justify-center mx-auto mb-6 shadow-hard">
+                <i data-lucide="mail-check" class="w-10 h-10 text-acid-yellow"></i>
+            </div>
+            <h1 class="font-display text-3xl mb-4">Check Your Email</h1>
+            <p class="text-gray-600 font-bold mb-8">We've sent a magic link to your inbox. Click it to log in instantly.</p>
+            
+            <button onclick="window.location.href='index.html'" class="brutal-btn w-full bg-white text-black py-3 rounded-xl border-4 border-black font-bold text-lg shadow-hard hover:bg-gray-100">
+                Back to Home (Simulated)
+            </button>
+            <p class="mt-4 text-xs font-bold text-gray-400">Did not receive it? <a href="#" class="underline">Resend</a></p>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            const originalText = btn.innerHTML;
+            
+            // Simulate loading
+            btn.innerHTML = '<i data-lucide="loader" class="w-5 h-5 animate-spin"></i> Sending...';
+            lucide.createIcons();
+            
+            setTimeout(() => {
+                document.getElementById('loginCard').classList.add('hidden');
+                document.getElementById('successCard').classList.remove('hidden');
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
