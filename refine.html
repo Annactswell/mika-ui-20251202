@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mika Studio | Refine & Edit</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;900&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'acid-yellow': '#DFFF00',
+                        'jungle-green': '#00684A',
+                        'soft-cream': '#FFFDF5',
+                        'monster-purple': '#9D4EDD',
+                        'hot-pink': '#FF0099',
+                    },
+                    fontFamily: {
+                        'display': ['"Poppins"', 'sans-serif'],
+                        'body': ['"Inter"', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'hard': '5px 5px 0px 0px #000000',
+                        'hard-hover': '2px 2px 0px 0px #000000',
+                        'card': '8px 8px 0px 0px #000000',
+                        'inner-hard': 'inset 4px 4px 0px 0px #000000',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        ::-webkit-scrollbar { width: 12px; }
+        ::-webkit-scrollbar-track { background: #FFFDF5; border-left: 3px solid black; }
+        ::-webkit-scrollbar-thumb { background: #00684A; border: 3px solid black; }
+        ::-webkit-scrollbar-thumb:hover { background: #DFFF00; }
+
+        .doodle-bg {
+            background-image: radial-gradient(#000 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .brutal-btn { transition: all 0.1s ease; }
+        .brutal-btn:active { transform: translate(4px, 4px); box-shadow: 0px 0px 0px 0px #000000; }
+
+        /* Custom Range Slider */
+        input[type=range] {
+            -webkit-appearance: none; 
+            background: transparent; 
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            background: #DFFF00;
+            border: 3px solid black;
+            cursor: pointer;
+            margin-top: -10px; 
+            box-shadow: 2px 2px 0px 0px #000000;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 8px;
+            background: #000;
+            border-radius: 4px;
+            border: 2px solid black;
+        }
+
+        /* Tool Button Logic */
+        .tool-btn.active {
+            background-color: #000;
+            color: #DFFF00;
+            box-shadow: inset 2px 2px 0px 0px #333;
+        }
+        
+        /* Brush Cursor */
+        .cursor-brush {
+            cursor: crosshair;
+        }
+        
+        .loading-overlay {
+            background-image: repeating-linear-gradient(
+                45deg,
+                #000 0,
+                #000 10px,
+                #DFFF00 10px,
+                #DFFF00 20px
+            );
+            background-size: 200% 200%;
+            animation: barberpole 2s linear infinite;
+        }
+        
+        @keyframes barberpole {
+            100% { background-position: 100% 100%; }
+        }
+    </style>
+</head>
+<body class="bg-soft-cream font-body text-black overflow-x-hidden h-screen flex flex-col">
+
+    <!-- Top Navigation -->
+    <nav class="border-b-4 border-black bg-acid-yellow shrink-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center gap-2 cursor-pointer group hover:scale-105 transition-transform">
+                    <span class="font-display text-5xl tracking-widest uppercase italic" style="text-shadow: 4px 4px 0px #FFF;">Mika</span>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8 font-bold text-lg">
+                    <a href="create.html" class="text-sm font-bold bg-white border-2 border-black px-3 py-1 rounded hover:bg-gray-100 flex items-center gap-2">
+                        <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Studio
+                    </a>
+                    <div class="flex items-center gap-2 bg-white border-2 border-black rounded-full px-3 py-1 shadow-hard-hover">
+                        <i data-lucide="coins" class="w-5 h-5 text-yellow-500 fill-current"></i>
+                        <span class="font-bold">50</span>
+                    </div>
+                    <a href="profile.html" class="w-10 h-10 rounded-full bg-monster-purple border-2 border-black overflow-hidden hover:scale-110 transition-transform">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="User" class="w-full h-full object-cover">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Workspace -->
+    <div class="flex-1 flex flex-col md:flex-row overflow-hidden">
+        
+        <!-- Left Sidebar: Edit Controls -->
+        <aside class="w-full md:w-[400px] bg-white border-r-4 border-black p-6 overflow-y-auto z-10 shadow-[4px_0px_0px_0px_rgba(0,0,0,0.1)]">
+            <div class="space-y-8">
+                
+                <div class="bg-acid-yellow border-4 border-black p-4 rounded-xl shadow-hard transform -rotate-1">
+                    <h2 class="font-display text-2xl mb-2">Refine Mode</h2>
+                    <p class="text-sm font-bold">1. Mask area with brush<br>2. Describe change<br>3. Generate</p>
+                </div>
+
+                <!-- Edit Prompt Input -->
+                <div class="space-y-2">
+                    <label class="font-display text-xl uppercase">Edit Prompt</label>
+                    <textarea id="editPrompt" class="w-full h-32 p-4 bg-soft-cream border-4 border-black rounded-xl font-bold text-lg resize-none focus:outline-none focus:ring-4 focus:ring-acid-yellow/50 shadow-inner-hard" placeholder="What should replace the masked area? e.g. Red robotic sunglasses..."></textarea>
+                </div>
+
+                <!-- Brush Settings -->
+                <div class="space-y-6 border-t-4 border-black pt-6">
+                    <h3 class="font-display text-xl">Brush Settings</h3>
+                    
+                    <!-- Brush Size -->
+                    <div>
+                        <div class="flex justify-between mb-1">
+                             <label class="font-bold text-sm">Brush Size</label>
+                             <span class="font-bold text-sm" id="brushSizeVal">40px</span>
+                        </div>
+                        <input type="range" min="10" max="100" value="40" class="w-full" id="brushSizeSlider">
+                    </div>
+
+                    <!-- Denoising Strength -->
+                    <div>
+                        <div class="flex justify-between mb-1">
+                             <label class="font-bold text-sm">Change Strength</label>
+                             <span class="font-bold text-sm">0.75</span>
+                        </div>
+                        <input type="range" min="0.1" max="1.0" step="0.05" value="0.75" class="w-full">
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="pt-4 space-y-3">
+                    <button id="generateFillBtn" class="brutal-btn w-full bg-monster-purple text-white font-display text-2xl py-4 rounded-xl border-4 border-black shadow-hard hover:shadow-hard-hover hover:bg-black flex items-center justify-center gap-3">
+                        <i data-lucide="wand-2" class="w-6 h-6"></i>
+                        GENERATE FILL
+                    </button>
+                    <button class="brutal-btn w-full bg-white text-black font-bold text-lg py-3 rounded-xl border-4 border-black hover:bg-gray-100 flex items-center justify-center gap-2" onclick="clearMask()">
+                        <i data-lucide="trash-2" class="w-5 h-5"></i>
+                        Clear Mask
+                    </button>
+                </div>
+
+            </div>
+        </aside>
+
+        <!-- Right Area: Canvas -->
+        <main class="flex-1 bg-doodle-bg relative flex flex-col">
+            
+            <!-- Toolbar -->
+            <div class="h-16 border-b-4 border-black bg-white flex items-center justify-between px-6">
+                <div class="flex items-center gap-2 bg-gray-100 rounded-lg p-1 border-2 border-black">
+                    <button class="tool-btn active p-2 rounded hover:bg-gray-200 transition-colors" title="Brush" id="toolBrush">
+                        <i data-lucide="paintbrush" class="w-5 h-5"></i>
+                    </button>
+                    <button class="tool-btn p-2 rounded hover:bg-gray-200 transition-colors" title="Eraser" id="toolEraser">
+                        <i data-lucide="eraser" class="w-5 h-5"></i>
+                    </button>
+                </div>
+                
+                <div class="flex gap-4">
+                    <button class="p-2 hover:bg-gray-100 rounded border-2 border-transparent hover:border-black transition-all" title="Undo" onclick="alert('Undo simulated')">
+                        <i data-lucide="undo-2" class="w-5 h-5"></i>
+                    </button>
+                    <button class="p-2 hover:bg-gray-100 rounded border-2 border-transparent hover:border-black transition-all" title="Redo" onclick="alert('Redo simulated')">
+                        <i data-lucide="redo-2" class="w-5 h-5"></i>
+                    </button>
+                     <button class="brutal-btn bg-white border-2 border-black px-4 py-2 font-bold rounded-lg shadow-hard text-sm hover:bg-acid-yellow hover:text-black" onclick="alert('Saved to Library!')">
+                                <i data-lucide="bookmark" class="w-4 h-4 inline-block mr-1"></i> Save
+                             </button>
+                </div>
+            </div>
+
+            <!-- Canvas Viewport -->
+            <div class="flex-1 p-4 md:p-8 overflow-hidden bg-gray-100 flex flex-col md:flex-row gap-6 items-center justify-center" id="viewport">
+                
+                <!-- Left: Original (Input) -->
+                <div class="relative w-full md:w-1/2 h-full flex flex-col">
+                    <div class="text-center mb-2 font-display text-xl uppercase">Original / Mask</div>
+                    <div class="flex-1 relative shadow-card border-4 border-black bg-white flex items-center justify-center overflow-hidden p-4" id="canvasContainer">
+                        <div class="relative max-w-full max-h-full">
+                            <!-- The Image to Edit -->
+                            <img id="targetImage" src="https://images.unsplash.com/photo-1563089145-599997674d42?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="max-h-full max-w-full object-contain pointer-events-none select-none block" draggable="false" style="max-height: 60vh;">
+                            
+                            <!-- Drawing Canvas Layer -->
+                            <canvas id="maskCanvas" class="absolute inset-0 w-full h-full cursor-brush touch-none"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Result (Output) -->
+                <div class="relative w-full md:w-1/2 h-full flex flex-col">
+                    <div class="text-center mb-2 font-display text-xl uppercase">Result</div>
+                    <div class="flex-1 relative shadow-card border-4 border-black bg-white flex items-center justify-center overflow-hidden bg-soft-cream p-4" id="resultContainer">
+                        
+                        <!-- Placeholder -->
+                        <div id="resultPlaceholder" class="text-center text-gray-400 p-4">
+                            <i data-lucide="paintbrush" class="w-12 h-12 mx-auto mb-4 opacity-50"></i>
+                            <p class="font-bold text-lg">1. Mask an area on the left</p>
+                            <p class="font-bold text-lg">2. Describe changes</p>
+                            <p class="font-bold text-lg">3. Hit Generate</p>
+                        </div>
+
+                        <!-- Result Image (Hidden initially) -->
+                        <img id="resultImage" src="" class="hidden max-h-full max-w-full object-contain pointer-events-none border-2 border-black block" style="max-height: 60vh;">
+
+                        <!-- Loading Overlay -->
+                        <div id="loadingOverlay" class="absolute inset-0 bg-white/90 hidden flex flex-col items-center justify-center z-20">
+                             <div class="w-48 h-6 border-4 border-black rounded-full overflow-hidden bg-white shadow-hard">
+                                <div class="h-full w-full loading-overlay"></div>
+                            </div>
+                            <p class="font-display text-xl mt-4">Refining Pixels...</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // URL Param Logic to simulate passing image
+        const urlParams = new URLSearchParams(window.location.search);
+        const imageUrl = urlParams.get('img');
+        if(imageUrl) {
+            document.getElementById('targetImage').src = imageUrl;
+        }
+
+        // Brush Logic
+        const canvas = document.getElementById('maskCanvas');
+        const ctx = canvas.getContext('2d');
+        const image = document.getElementById('targetImage');
+        let isDrawing = false;
+        let brushSize = 40;
+        let mode = 'brush'; // brush or eraser
+
+        // Resize canvas to match image dimensions exactly when image loads
+        image.onload = function() {
+            canvas.width = image.clientWidth;
+            canvas.height = image.clientHeight;
+            // Reset context styles after resize
+            updateContext();
+        };
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+             canvas.width = image.clientWidth;
+             canvas.height = image.clientHeight;
+             updateContext();
+        });
+
+        function updateContext() {
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+        }
+
+        // Tools
+        document.getElementById('brushSizeSlider').addEventListener('input', (e) => {
+            brushSize = e.target.value;
+            document.getElementById('brushSizeVal').innerText = brushSize + 'px';
+        });
+
+        document.getElementById('toolBrush').addEventListener('click', (e) => {
+            mode = 'brush';
+            document.getElementById('toolBrush').classList.add('active');
+            document.getElementById('toolEraser').classList.remove('active');
+        });
+
+        document.getElementById('toolEraser').addEventListener('click', (e) => {
+            mode = 'eraser';
+            document.getElementById('toolEraser').classList.add('active');
+            document.getElementById('toolBrush').classList.remove('active');
+        });
+
+        // Drawing Events
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('mouseout', stopDrawing);
+
+        function startDrawing(e) {
+            isDrawing = true;
+            draw(e);
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+            
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            ctx.lineWidth = brushSize;
+
+            if (mode === 'brush') {
+                ctx.globalCompositeOperation = 'source-over';
+                ctx.strokeStyle = 'rgba(223, 255, 0, 0.5)'; // Acid yellow semi-transparent
+            } else {
+                ctx.globalCompositeOperation = 'destination-out';
+                ctx.strokeStyle = 'rgba(0,0,0,1)';
+            }
+
+            ctx.beginPath();
+            ctx.moveTo(x, y); // Simply dots for now, better path logic can be added
+            ctx.lineTo(x, y);
+            ctx.stroke();
+            
+            // Simple continuous drawing for simplicity in this demo
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(x, y);
+            ctx.stroke();
+            
+            [lastX, lastY] = [x, y];
+        }
+        
+        // Better mouse tracking
+        let lastX = 0;
+        let lastY = 0;
+        canvas.addEventListener('mousedown', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            lastX = e.clientX - rect.left;
+            lastY = e.clientY - rect.top;
+        });
+
+        function stopDrawing() {
+            isDrawing = false;
+        }
+
+        function clearMask() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        // Generate Logic
+        document.getElementById('generateFillBtn').addEventListener('click', () => {
+            const overlay = document.getElementById('loadingOverlay');
+            const placeholder = document.getElementById('resultPlaceholder');
+            const resultImg = document.getElementById('resultImage');
+            
+            // Show loading
+            overlay.classList.remove('hidden');
+            
+            setTimeout(() => {
+                overlay.classList.add('hidden');
+                
+                // Hide placeholder, show result
+                placeholder.classList.add('hidden');
+                resultImg.classList.remove('hidden');
+                resultImg.classList.add('animate__animated', 'animate__fadeIn');
+                
+                // Simulating a result (using a different image for demo)
+                // In a real app, this would be the processed image from the backend
+                resultImg.src = "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80";
+                
+                // Clear the mask on the source
+                clearMask();
+                
+            }, 2000);
+        });
+
+    </script>
+</body>
+</html>
+

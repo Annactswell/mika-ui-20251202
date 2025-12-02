@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mika | The AI Creative Hub</title>
+    <!-- Google Fonts: Using bold, modern, non-serif fonts for display -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;900&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Animate.css for high-impact animations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'acid-yellow': '#DFFF00',
+                        'jungle-green': '#00684A',
+                        'soft-cream': '#FFFDF5',
+                        'monster-purple': '#9D4EDD',
+                    },
+                    fontFamily: {
+                        // Poppins Black for the eye-catching, display font
+                        'display': ['"Poppins"', 'sans-serif'],
+                        'body': ['"Inter"', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'hard': '5px 5px 0px 0px #000000',
+                        'hard-hover': '2px 2px 0px 0px #000000',
+                        'card': '8px 8px 0px 0px #000000',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FFFDF5;
+            border-left: 3px solid black;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #00684A;
+            border: 3px solid black;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #DFFF00;
+        }
+
+        /* Marquee Animation */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Doodle Background Texture */
+        .doodle-bg {
+            background-image: radial-gradient(#000 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* Float Animation */
+        .float-anim {
+            animation: float 6s ease-in-out infinite;
+        }
+        .float-anim-delay {
+            animation: float 6s ease-in-out infinite;
+            animation-delay: 3s;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .brutal-btn {
+            transition: all 0.1s ease;
+        }
+        .brutal-btn:active {
+            transform: translate(4px, 4px);
+            box-shadow: 0px 0px 0px 0px #000000;
+        }
+    </style>
+</head>
+<body class="bg-soft-cream font-body text-black overflow-x-hidden">
+
+    <!-- Top Navigation -->
+    <nav class="fixed w-full top-0 z-50 border-b-4 border-black bg-acid-yellow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center gap-2 cursor-pointer group hover:scale-105 transition-transform">
+                    <span class="font-display text-5xl tracking-widest uppercase italic" style="text-shadow: 4px 4px 0px #FFF;">Mika</span>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8 font-bold text-lg">
+                    <a href="gallery.html" class="hover:text-jungle-green hover:underline decoration-4 decoration-jungle-green underline-offset-4">Gallery</a>
+                    <a href="models.html" class="hover:text-jungle-green hover:underline decoration-4 decoration-jungle-green underline-offset-4">Models</a>
+                    <a href="challenges.html" class="hover:text-jungle-green hover:underline decoration-4 decoration-jungle-green underline-offset-4">Challenges</a>
+                    <a href="library.html" class="hover:text-jungle-green hover:underline decoration-4 decoration-jungle-green underline-offset-4">Library</a>
+                    <a href="create.html" class="brutal-btn bg-jungle-green text-acid-yellow px-6 py-2 rounded-full border-2 border-black shadow-hard hover:shadow-hard-hover transform hover:-translate-y-0.5">
+                        Create Now
+                    </a>
+                    <a href="profile.html" class="w-10 h-10 rounded-full bg-monster-purple border-2 border-black overflow-hidden hover:scale-110 transition-transform">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="User" class="w-full h-full object-cover">
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button class="p-2 border-2 border-black bg-white shadow-hard rounded-md">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="pt-32 pb-16 lg:pt-48 lg:pb-32 px-4 relative doodle-bg">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            
+            <!-- Left Copy -->
+            <div class="relative z-10 space-y-6">
+                <div class="inline-block bg-black text-white px-4 py-1 rounded-full font-bold text-sm border-2 border-black transform -rotate-2 animate__animated animate__headShake">
+                    🚀 New Gen V5 Engine Live!
+                </div>
+                <h1 class="font-display text-7xl lg:text-9xl leading-none animate__animated animate__bounceInDown">
+                    Unleash Your<br>
+                    <span class="text-jungle-green bg-acid-yellow px-4 border-4 border-black inline-block transform rotate-1 shadow-card rounded-xl mt-4 animate__animated animate__fadeInLeft">Electric</span> 
+                    Vision
+                </h1>
+                <p class="text-xl font-bold text-gray-800 max-w-lg animate__animated animate__fadeInUp animate__delay-1s">
+                    Ditch the dull. Explode with color and inspiration. Mika is the AI creative hub for generation and next-level photo editing.
+                </p>
+                
+                <!-- Input Mockup -->
+                <div class="mt-8 relative max-w-xl animate__animated animate__zoomIn animate__delay-1s">
+                    <div class="bg-white border-4 border-black rounded-xl p-2 shadow-card flex flex-col sm:flex-row gap-2">
+                        <input type="text" placeholder="Enter Prompt: A T-Rex wearing roller skates, neo-brutalist poster..." class="w-full p-3 font-bold focus:outline-none bg-transparent text-lg">
+                        <button class="brutal-btn bg-jungle-green text-acid-yellow font-display text-xl px-8 py-3 rounded-lg border-2 border-black hover:bg-black transition-colors shrink-0">
+                            Generate!
+                        </button>
+                    </div>
+                    <!-- Decorative Element -->
+                    <div class="absolute -top-10 -right-10 w-20 h-20 bg-monster-purple rounded-full border-4 border-black flex items-center justify-center text-white font-bold transform rotate-12 animate-bounce hidden lg:flex">
+                        Free!
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Visual Display (Stacked Cards) -->
+            <div class="relative h-[500px] w-full hidden lg:block">
+                <!-- Image Card 1 -->
+                <div class="absolute top-0 right-10 w-80 h-96 bg-white border-4 border-black rounded-3xl p-3 shadow-card transform rotate-6 float-anim z-10">
+                    <div class="w-full h-full bg-cover bg-center rounded-xl border-2 border-black overflow-hidden relative group">
+                        <!-- Placeholder Image 1 -->
+                        <img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Colorful Brutalist Art" class="w-full h-full object-cover">
+                        <div class="absolute bottom-0 left-0 w-full p-4 bg-black/80 text-white translate-y-full group-hover:translate-y-0 transition-transform">
+                            <p class="font-bold text-sm">Prompt: Cyberpunk forest</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Image Card 2 -->
+                <div class="absolute top-20 right-48 w-72 h-80 bg-acid-yellow border-4 border-black rounded-3xl p-3 shadow-card transform -rotate-6 float-anim-delay z-20">
+                    <div class="w-full h-full bg-cover bg-center rounded-xl border-2 border-black overflow-hidden relative group">
+                         <!-- Placeholder Image 2 -->
+                         <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Abstract Art" class="w-full h-full object-cover">
+                         <div class="absolute top-2 right-2 bg-white border-2 border-black rounded-full p-1">
+                            <i data-lucide="heart" class="w-4 h-4 text-red-500 fill-current"></i>
+                         </div>
+                    </div>
+                </div>
+                
+                <!-- Decorative Lines -->
+                <svg class="absolute bottom-0 left-0 w-32 h-32 text-black z-0" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 90 Q 50 10 90 90" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+                    <circle cx="20" cy="20" r="5" fill="currentColor"/>
+                    <circle cx="80" cy="30" r="8" fill="#00684A"/>
+                </svg>
+            </div>
+        </div>
+    </header>
+
+    <!-- Scrolling Marquee -->
+    <div class="border-y-4 border-black bg-jungle-green text-acid-yellow py-4 overflow-hidden transform -skew-y-2">
+        <div class="marquee-container">
+            <div class="marquee-content font-display text-4xl">
+                CREATE • INSPIRE • DREAM • EXPLORE • BE WILD • JUST DO IT • AI ART REVOLUTION • NO LIMITS • 
+                CREATE • INSPIRE • DREAM • EXPLORE • BE WILD • JUST DO IT • AI ART REVOLUTION • NO LIMITS • 
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section (Bento Grid) -->
+    <section class="py-20 px-4 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="font-display text-5xl mb-4">Why Choose Mika?</h2>
+            <div class="w-24 h-4 bg-acid-yellow border-2 border-black mx-auto rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Feature 1: AI Generation -->
+            <div class="feature-card bg-white border-4 border-black rounded-2xl p-8 shadow-card hover:-translate-y-2 transition-transform duration-300">
+                <div class="feature-icon w-16 h-16 bg-acid-yellow border-4 border-black rounded-full flex items-center justify-center mb-6">
+                    <i data-lucide="zap" class="w-8 h-8 text-black"></i>
+                </div>
+                <h3 class="font-display text-2xl mb-3">Instant Creation</h3>
+                <p class="font-bold text-gray-600">Text-to-masterpiece in just 3 seconds. Our engine is always ready to capture your fleeting inspiration.</p>
+            </div>
+
+            <!-- Feature 2: Photo Editing / Remix -->
+            <div class="feature-card bg-monster-purple border-4 border-black rounded-2xl p-8 shadow-card transform md:-rotate-2 hover:rotate-0 transition-transform duration-300 relative">
+                <div class="absolute -top-4 -right-4 bg-acid-yellow border-4 border-black px-4 py-1 rounded-full font-bold transform rotate-12">
+                    HOT!
+                </div>
+                <div class="feature-icon w-16 h-16 bg-white border-4 border-black rounded-full flex items-center justify-center mb-6">
+                    <i data-lucide="crop" class="w-8 h-8 text-black"></i>
+                </div>
+                <h3 class="font-display text-2xl mb-3 text-white">Style Fusion & Editing</h3>
+                <p class="font-bold text-white/90">Upload, remix, and retouch. Our exclusive "Color Riot" algorithms let you fine-tune details or completely rebuild images.</p>
+            </div>
+
+            <!-- Feature 3: Community -->
+            <div class="feature-card bg-white border-4 border-black rounded-2xl p-8 shadow-card hover:-translate-y-2 transition-transform duration-300">
+                <div class="feature-icon w-16 h-16 bg-jungle-green border-4 border-black rounded-full flex items-center justify-center mb-6">
+                    <i data-lucide="users" class="w-8 h-8 text-acid-yellow"></i>
+                </div>
+                <h3 class="font-display text-2xl mb-3">Co-Creation Community</h3>
+                <p class="font-bold text-gray-600">More than a tool, it's a creative hub. Remix others' prompts and participate in weekly "Mika Masterpiece" challenges.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION: How It Works -->
+    <section class="py-20 px-4 max-w-7xl mx-auto border-t-4 border-black bg-white">
+        <div class="text-center mb-16">
+            <h2 class="font-display text-5xl mb-4 text-jungle-green section-header">The Mika Flow</h2>
+            <p class="text-xl font-bold text-gray-800 section-text">From Zero to Masterpiece in 3 Simple Steps.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
+            
+            <!-- Step 1 -->
+            <div class="text-center step-item">
+                <div class="relative inline-block">
+                    <div class="w-20 h-20 bg-acid-yellow border-4 border-black rounded-full flex items-center justify-center mx-auto mb-6 shadow-hard">
+                        <span class="font-display text-4xl text-black">1</span>
+                    </div>
+                    <!-- Decorative line connector (Desktop only) -->
+                    <div class="hidden md:block absolute w-full h-1 bg-jungle-green top-1/2 left-[calc(100%+48px)] -translate-y-1/2"></div>
+                </div>
+                <h3 class="font-display text-3xl mb-3 text-black">Prompt or Upload</h3>
+                <p class="font-bold text-gray-700">Type your wildest prompt or drop an existing image for remixing.</p>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="text-center step-item">
+                <div class="relative inline-block">
+                    <div class="w-20 h-20 bg-jungle-green border-4 border-black rounded-full flex items-center justify-center mx-auto mb-6 shadow-hard">
+                        <span class="font-display text-4xl text-acid-yellow">2</span>
+                    </div>
+                    <!-- Decorative line connector (Desktop only) -->
+                    <div class="hidden md:block absolute w-full h-1 bg-jungle-green top-1/2 left-[calc(100%+48px)] -translate-y-1/2"></div>
+                </div>
+                <h3 class="font-display text-3xl mb-3 text-black">Engine Computes</h3>
+                <p class="font-bold text-gray-700">Our V5 Engine uses distributed GPUs to render your vision in real-time.</p>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="text-center step-item">
+                <div class="relative inline-block">
+                    <div class="w-20 h-20 bg-monster-purple border-4 border-black rounded-full flex items-center justify-center mx-auto mb-6 shadow-hard">
+                        <i data-lucide="share2" class="w-10 h-10 text-acid-yellow"></i>
+                    </div>
+                </div>
+                <h3 class="font-display text-3xl mb-3 text-black">Share & Inspire</h3>
+                <p class="font-bold text-gray-700">Download the high-res file, or publish it to the Mika community for others to remix.</p>
+            </div>
+            
+            <!-- Mobile Step Separators -->
+            <div class="md:hidden absolute inset-0 flex flex-col justify-around items-center -translate-y-8">
+                <div class="w-1 h-16 bg-jungle-green my-2"></div>
+                <div class="w-1 h-16 bg-jungle-green my-2"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trending Gallery -->
+    <section class="py-20 bg-acid-yellow border-t-4 border-black">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-end mb-12">
+                <div>
+                    <h2 class="font-display text-5xl text-black">Trending This Week</h2>
+                    <p class="text-xl font-bold mt-2">See what everyone's cooking up</p>
+                </div>
+                <button class="hidden md:block brutal-btn bg-white border-4 border-black px-6 py-2 font-bold rounded-lg shadow-hard hover:shadow-hard-hover">
+                    View All
+                </button>
+            </div>
+
+            <!-- Masonry-like Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[200px]">
+                <!-- Item 1: Large -->
+                <div class="col-span-2 row-span-2 border-4 border-black rounded-2xl overflow-hidden relative group shadow-card bg-white">
+                    <img src="https://images.unsplash.com/photo-1563089145-599997674d42?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Art" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
+                        <button class="bg-acid-yellow border-2 border-black px-4 py-2 font-bold rounded-full transform rotate-[-5deg]">Remix This</button>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="col-span-1 row-span-1 border-4 border-black rounded-2xl overflow-hidden relative group shadow-hard bg-white">
+                     <img src="https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Art" class="w-full h-full object-cover">
+                </div>
+                
+                <!-- Item 3 -->
+                <div class="col-span-1 row-span-1 border-4 border-black rounded-2xl overflow-hidden relative group shadow-hard bg-white">
+                     <img src="https://images.unsplash.com/photo-1618172193763-c511deb635ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Art" class="w-full h-full object-cover">
+                </div>
+
+                <!-- Item 4 -->
+                <div class="col-span-1 row-span-1 border-4 border-black rounded-2xl overflow-hidden relative group shadow-hard bg-white">
+                     <img src="https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Art" class="w-full h-full object-cover">
+                </div>
+
+                 <!-- Item 5 -->
+                 <div class="col-span-1 row-span-1 border-4 border-black bg-jungle-green rounded-2xl flex items-center justify-center group cursor-pointer shadow-hard">
+                    <div class="text-center">
+                        <i data-lucide="plus-circle" class="w-12 h-12 text-acid-yellow mx-auto mb-2 group-hover:scale-125 transition-transform"></i>
+                        <span class="font-display text-white text-xl">Upload Yours</span>
+                    </div>
+               </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof / CTA -->
+    <section class="py-24 px-4 relative overflow-hidden">
+        <!-- Decorative Background Blob -->
+        <div class="absolute top-20 left-10 w-32 h-32 bg-acid-yellow rounded-full blur-xl opacity-60"></div>
+        <div class="absolute bottom-20 right-10 w-48 h-48 bg-jungle-green rounded-full blur-xl opacity-60"></div>
+
+        <div class="max-w-4xl mx-auto bg-white border-4 border-black rounded-3xl p-8 md:p-12 text-center shadow-card relative z-10">
+            <h2 class="font-display text-4xl md:text-6xl mb-6">Ready to Create Something Electric?</h2>
+            <p class="text-xl font-bold text-gray-600 mb-8">Join over 1,000,000 creators. Get 50 free credits now!</p>
+            
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <button class="brutal-btn bg-black text-white border-2 border-black px-8 py-4 rounded-xl font-bold text-xl hover:bg-gray-800 flex items-center justify-center gap-2">
+                    <i data-lucide="apple" class="w-6 h-6"></i>
+                    Download on App Store
+                </button>
+                <button class="brutal-btn bg-acid-yellow text-black border-2 border-black px-8 py-4 rounded-xl font-bold text-xl hover:bg-yellow-300 flex items-center justify-center gap-2">
+                    <i data-lucide="chrome" class="w-6 h-6"></i>
+                    Start Free Trial (Web)
+                </button>
+            </div>
+            
+            <p class="mt-6 text-sm font-bold text-gray-400">No Credit Card Required · Cancel Anytime</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white pt-16 pb-8 border-t-4 border-jungle-green">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+            <div class="col-span-1 md:col-span-2">
+                <div class="flex items-center gap-2 mb-4">
+                     <span class="font-display text-4xl uppercase italic text-white" style="text-shadow: 3px 3px 0px #DFFF00;">Mika</span>
+                </div>
+                <p class="text-gray-400 font-bold max-w-sm">
+                    We empower everyone to be an artist. Mika is the premier AI creative hub for generation and photo editing. Do not go gentle into that good night—go create!
+                </p>
+            </div>
+            <div>
+                <h4 class="font-display text-xl text-acid-yellow mb-4">Explore</h4>
+                <ul class="space-y-2 font-bold text-gray-400">
+                    <li><a href="gallery.html" class="hover:text-white">Gallery</a></li>
+                    <li><a href="pricing.html" class="hover:text-white">Pricing</a></li>
+                    <li><a href="api_docs.html" class="hover:text-white">API Docs</a></li>
+                    <li><a href="#" class="hover:text-white">Blog</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-display text-xl text-acid-yellow mb-4">Links</h4>
+                <div class="flex gap-4">
+                    <a href="#" class="w-10 h-10 bg-white text-black rounded-lg flex items-center justify-center hover:bg-acid-yellow transition-colors">
+                        <i data-lucide="twitter" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white text-black rounded-lg flex items-center justify-center hover:bg-acid-yellow transition-colors">
+                        <i data-lucide="instagram" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white text-black rounded-lg flex items-center justify-center hover:bg-acid-yellow transition-colors">
+                        <i data-lucide="github" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="text-center border-t border-gray-800 pt-8 font-bold text-gray-500">
+            &copy; 2023 Mika Inc. Stay Electric.
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Function to simulate animations (since we cannot rely on Intersection Observer in this environment)
+        // We will trigger the main feature icons and the new "How It Works" steps shortly after load.
+        window.addEventListener('load', () => {
+            // Animate Feature Icons
+            document.querySelectorAll('.feature-icon').forEach((icon, index) => {
+                setTimeout(() => {
+                    icon.classList.add('animate__animated', 'animate__heartBeat');
+                }, 500 + index * 300); // Stagger the animation
+            });
+
+            // Animate How It Works Steps
+            document.querySelectorAll('.step-item').forEach((step, index) => {
+                setTimeout(() => {
+                    step.classList.add('animate__animated', 'animate__fadeInUp');
+                }, 1000 + index * 400); // Stagger the animation
+            });
+        });
+
+        // Simple input interaction: When pressing Enter or clicking Generate, the button changes
+        const generateBtn = document.querySelector('.mt-8 button.brutal-btn');
+        const inputField = document.querySelector('.mt-8 input[type="text"]');
+
+        const simulateGeneration = () => {
+             const originalText = generateBtn.innerText;
+            generateBtn.innerText = "Generating...";
+            generateBtn.classList.add('bg-black', 'text-white');
+            generateBtn.classList.remove('bg-jungle-green', 'text-acid-yellow');
+            
+            setTimeout(() => {
+                generateBtn.innerText = originalText;
+                generateBtn.classList.remove('bg-black', 'text-white');
+                generateBtn.classList.add('bg-jungle-green', 'text-acid-yellow');
+                // Use a modal-style message box instead of alert()
+                const message = "Taking you to the creation page now! (Simulated)";
+                console.log(message);
+                // In a real app, this would redirect or show a custom UI modal
+            }, 1500);
+        };
+
+        generateBtn.addEventListener('click', simulateGeneration);
+        inputField.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault(); // Prevent form submission if it were a form
+                simulateGeneration();
+            }
+        });
+        
+        // Minor fix to ensure smooth mobile menu icon display on load
+        document.querySelector('.md\\:hidden button').addEventListener('click', () => {
+            console.log('Mobile menu toggle simulated.');
+            // In a real app, this would show a hidden mobile menu overlay
+        });
+    </script>
+</body>
+</html>

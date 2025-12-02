@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mika Models | The Engine Room</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;900&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'acid-yellow': '#DFFF00',
+                        'jungle-green': '#00684A',
+                        'soft-cream': '#FFFDF5',
+                        'monster-purple': '#9D4EDD',
+                        'hot-pink': '#FF0099',
+                        'electric-blue': '#4361EE',
+                    },
+                    fontFamily: {
+                        'display': ['"Poppins"', 'sans-serif'],
+                        'body': ['"Inter"', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'hard': '5px 5px 0px 0px #000000',
+                        'hard-hover': '2px 2px 0px 0px #000000',
+                        'card': '8px 8px 0px 0px #000000',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        ::-webkit-scrollbar { width: 12px; }
+        ::-webkit-scrollbar-track { background: #FFFDF5; border-left: 3px solid black; }
+        ::-webkit-scrollbar-thumb { background: #00684A; border: 3px solid black; }
+        ::-webkit-scrollbar-thumb:hover { background: #DFFF00; }
+
+        .doodle-bg {
+            background-image: radial-gradient(#000 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .brutal-btn { transition: all 0.1s ease; }
+        .brutal-btn:active { transform: translate(4px, 4px); box-shadow: 0px 0px 0px 0px #000000; }
+
+        .model-card:hover .model-overlay {
+            opacity: 1;
+        }
+        
+        /* Tech Badge Style */
+        .tech-badge {
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            letter-spacing: -0.5px;
+        }
+    </style>
+</head>
+<body class="bg-soft-cream font-body text-black overflow-x-hidden">
+
+    <!-- Top Navigation -->
+    <nav class="fixed w-full top-0 z-50 border-b-4 border-black bg-acid-yellow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center gap-2 cursor-pointer group hover:scale-105 transition-transform">
+                    <span class="font-display text-5xl tracking-widest uppercase italic" style="text-shadow: 4px 4px 0px #FFF;">Mika</span>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8 font-bold text-lg">
+                    <a href="gallery.html" class="hover:text-jungle-green hover:underline decoration-4 decoration-jungle-green underline-offset-4">Gallery</a>
+                    <a href="models.html" class="text-jungle-green underline decoration-4 decoration-jungle-green underline-offset-4">Models</a>
+                    <a href="challenges.html" class="hover:text-jungle-green hover:underline decoration-4 decoration-jungle-green underline-offset-4">Challenges</a>
+                    <a href="library.html" class="hover:text-jungle-green hover:underline decoration-4 decoration-jungle-green underline-offset-4">Library</a>
+                    <a href="create.html" class="brutal-btn bg-jungle-green text-acid-yellow px-6 py-2 rounded-full border-2 border-black shadow-hard hover:shadow-hard-hover transform hover:-translate-y-0.5">
+                        Create Now
+                    </a>
+                    <a href="profile.html" class="w-10 h-10 rounded-full bg-monster-purple border-2 border-black overflow-hidden hover:scale-110 transition-transform">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="User" class="w-full h-full object-cover">
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button class="p-2 border-2 border-black bg-white shadow-hard rounded-md">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="pt-32 pb-16 px-4 relative doodle-bg border-b-4 border-black">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="text-left">
+                <div class="inline-block bg-electric-blue text-white px-4 py-1 rounded-none font-mono font-bold text-sm border-2 border-black mb-4 shadow-hard">
+                    SYSTEM STATUS: ONLINE
+                </div>
+                <h1 class="font-display text-6xl md:text-8xl mb-6 animate__animated animate__fadeInLeft">
+                    Choose Your <br>
+                    <span class="text-acid-yellow bg-black px-4 inline-block transform rotate-1">Engine</span>
+                </h1>
+                <p class="text-xl font-bold text-gray-800 max-w-lg animate__animated animate__fadeInUp">
+                    From photorealism to pixel art. Select the perfect AI model to power your next masterpiece.
+                </p>
+                <div class="mt-8 flex gap-4">
+                    <button class="brutal-btn bg-black text-white px-8 py-3 font-bold text-lg border-2 border-black rounded-lg shadow-hard hover:bg-gray-800">
+                        Browse All
+                    </button>
+                    <button class="brutal-btn bg-white text-black px-8 py-3 font-bold text-lg border-2 border-black rounded-lg shadow-hard hover:bg-acid-yellow">
+                        Train Model
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Hero Visual: Model Architecture Diagram Style -->
+            <div class="hidden lg:block relative h-[400px] bg-white border-4 border-black rounded-xl shadow-card p-4">
+                <div class="absolute top-4 left-4 w-32 h-32 bg-acid-yellow border-4 border-black rounded-full flex items-center justify-center z-10 animate-bounce">
+                    <span class="font-display text-2xl">SDXL</span>
+                </div>
+                <div class="absolute bottom-4 right-4 w-40 h-40 bg-monster-purple border-4 border-black rounded-none transform rotate-3 flex items-center justify-center z-10">
+                     <span class="font-display text-2xl text-white">LoRA</span>
+                </div>
+                <!-- Connecting Lines SVG -->
+                <svg class="w-full h-full" viewBox="0 0 400 400">
+                    <path d="M80 80 C 200 80, 200 320, 320 320" stroke="black" stroke-width="4" fill="none" stroke-dasharray="10 10" class="animate-[dash_20s_linear_infinite]"/>
+                    <rect x="150" y="150" width="100" height="100" rx="10" fill="#00684A" stroke="black" stroke-width="4" />
+                    <text x="200" y="205" text-anchor="middle" fill="#DFFF00" font-family="sans-serif" font-weight="900" font-size="24">V5</text>
+                </svg>
+            </div>
+        </div>
+    </header>
+
+    <!-- Featured Models (Official) -->
+    <section class="py-20 px-4 max-w-7xl mx-auto">
+        <div class="flex items-center gap-4 mb-12">
+            <div class="w-8 h-8 bg-black"></div>
+            <h2 class="font-display text-4xl">Mika Official Models</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <!-- Model 1: Realistic -->
+            <div class="bg-white border-4 border-black rounded-2xl overflow-hidden shadow-card hover:-translate-y-2 transition-transform duration-300 group">
+                <div class="h-64 relative border-b-4 border-black overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute top-4 left-4 bg-acid-yellow border-2 border-black px-2 py-1 text-xs font-bold uppercase">
+                        Flagship
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="font-display text-2xl">Mika Realism V5</h3>
+                        <span class="tech-badge bg-gray-200 px-2 py-1 border border-black text-xs">FP16</span>
+                    </div>
+                    <p class="font-bold text-gray-600 mb-6 text-sm">
+                        Our most advanced photorealistic model. Perfect for portraits, landscapes, and architectural visualization.
+                    </p>
+                    <div class="flex justify-between items-center border-t-2 border-black pt-4">
+                        <div class="flex -space-x-2">
+                             <div class="w-8 h-8 rounded-full border-2 border-black bg-gray-300"></div>
+                             <div class="w-8 h-8 rounded-full border-2 border-black bg-gray-400"></div>
+                             <div class="w-8 h-8 rounded-full border-2 border-black bg-white flex items-center justify-center text-xs font-bold">+2k</div>
+                        </div>
+                        <a href="create.html?model=mika-realism-v5" class="brutal-btn bg-jungle-green text-acid-yellow px-4 py-2 border-2 border-black rounded-lg font-bold text-sm hover:bg-black hover:text-white">
+                            Try Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Model 2: Anime -->
+            <div class="bg-white border-4 border-black rounded-2xl overflow-hidden shadow-card hover:-translate-y-2 transition-transform duration-300 group">
+                <div class="h-64 relative border-b-4 border-black overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1578632767115-351597cf2477?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute top-4 left-4 bg-hot-pink text-white border-2 border-black px-2 py-1 text-xs font-bold uppercase">
+                        Popular
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="font-display text-2xl">Niji Electric</h3>
+                        <span class="tech-badge bg-gray-200 px-2 py-1 border border-black text-xs">V4.0</span>
+                    </div>
+                    <p class="font-bold text-gray-600 mb-6 text-sm">
+                        Specialized for 2D illustration and anime styles. Bold lines, vibrant colors, and expressive characters.
+                    </p>
+                    <div class="flex justify-between items-center border-t-2 border-black pt-4">
+                        <div class="flex -space-x-2">
+                             <div class="w-8 h-8 rounded-full border-2 border-black bg-gray-300"></div>
+                             <div class="w-8 h-8 rounded-full border-2 border-black bg-gray-400"></div>
+                             <div class="w-8 h-8 rounded-full border-2 border-black bg-white flex items-center justify-center text-xs font-bold">+5k</div>
+                        </div>
+                        <a href="create.html?model=niji-electric" class="brutal-btn bg-jungle-green text-acid-yellow px-4 py-2 border-2 border-black rounded-lg font-bold text-sm hover:bg-black hover:text-white">
+                            Try Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Model 3: 3D -->
+            <div class="bg-white border-4 border-black rounded-2xl overflow-hidden shadow-card hover:-translate-y-2 transition-transform duration-300 group">
+                <div class="h-64 relative border-b-4 border-black overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1633596683562-4a4697de791c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute top-4 left-4 bg-electric-blue text-white border-2 border-black px-2 py-1 text-xs font-bold uppercase">
+                        New
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="font-display text-2xl">Poly-Perfect 3D</h3>
+                        <span class="tech-badge bg-gray-200 px-2 py-1 border border-black text-xs">SDXL</span>
+                    </div>
+                    <p class="font-bold text-gray-600 mb-6 text-sm">
+                        Generates stunning 3D renders with isometric views, plastic textures, and studio lighting.
+                    </p>
+                    <div class="flex justify-between items-center border-t-2 border-black pt-4">
+                        <div class="flex -space-x-2">
+                             <div class="w-8 h-8 rounded-full border-2 border-black bg-gray-300"></div>
+                             <div class="w-8 h-8 rounded-full border-2 border-black bg-gray-400"></div>
+                             <div class="w-8 h-8 rounded-full border-2 border-black bg-white flex items-center justify-center text-xs font-bold">+800</div>
+                        </div>
+                        <a href="create.html?model=poly-perfect" class="brutal-btn bg-jungle-green text-acid-yellow px-4 py-2 border-2 border-black rounded-lg font-bold text-sm hover:bg-black hover:text-white">
+                            Try Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Community Models (LoRAs) -->
+    <section class="py-20 bg-acid-yellow border-t-4 border-black">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-end mb-12">
+                <div>
+                    <h2 class="font-display text-4xl text-black">Community LoRAs</h2>
+                    <p class="text-xl font-bold mt-2">Fine-tuned styles by the community</p>
+                </div>
+                <!-- Filter Tags -->
+                <div class="hidden md:flex gap-2">
+                    <button class="px-4 py-1 bg-black text-white rounded-full font-bold border-2 border-black">Trending</button>
+                    <button class="px-4 py-1 bg-white text-black rounded-full font-bold border-2 border-black hover:bg-black hover:text-white">Latest</button>
+                    <button class="px-4 py-1 bg-white text-black rounded-full font-bold border-2 border-black hover:bg-black hover:text-white">Top Rated</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                
+                <!-- LoRA Card 1 -->
+                <div class="bg-white border-4 border-black rounded-xl p-3 shadow-hard hover:shadow-hard-hover cursor-pointer group">
+                    <div class="aspect-square bg-gray-200 border-2 border-black rounded-lg overflow-hidden mb-3 relative">
+                        <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover">
+                         <div class="absolute bottom-0 left-0 w-full bg-black/70 text-white text-xs p-1 text-center opacity-0 group-hover:opacity-100 transition-opacity">
+                            Trigger: "vaporwave"
+                        </div>
+                    </div>
+                    <h4 class="font-display text-lg leading-tight mb-1">Vaporwave 90s</h4>
+                    <div class="flex justify-between items-center text-xs font-bold text-gray-500">
+                        <span>@retro_king</span>
+                        <i data-lucide="download" class="w-4 h-4"></i>
+                    </div>
+                </div>
+
+                <!-- LoRA Card 2 -->
+                <div class="bg-white border-4 border-black rounded-xl p-3 shadow-hard hover:shadow-hard-hover cursor-pointer group">
+                    <div class="aspect-square bg-gray-200 border-2 border-black rounded-lg overflow-hidden mb-3 relative">
+                         <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover">
+                         <div class="absolute bottom-0 left-0 w-full bg-black/70 text-white text-xs p-1 text-center opacity-0 group-hover:opacity-100 transition-opacity">
+                            Trigger: "pencil sketch"
+                        </div>
+                    </div>
+                    <h4 class="font-display text-lg leading-tight mb-1">Pencil Sketch</h4>
+                    <div class="flex justify-between items-center text-xs font-bold text-gray-500">
+                        <span>@artist_x</span>
+                        <i data-lucide="download" class="w-4 h-4"></i>
+                    </div>
+                </div>
+
+                <!-- LoRA Card 3 -->
+                <div class="bg-white border-4 border-black rounded-xl p-3 shadow-hard hover:shadow-hard-hover cursor-pointer group">
+                    <div class="aspect-square bg-gray-200 border-2 border-black rounded-lg overflow-hidden mb-3 relative">
+                         <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover">
+                         <div class="absolute bottom-0 left-0 w-full bg-black/70 text-white text-xs p-1 text-center opacity-0 group-hover:opacity-100 transition-opacity">
+                            Trigger: "low poly"
+                        </div>
+                    </div>
+                    <h4 class="font-display text-lg leading-tight mb-1">Low Poly God</h4>
+                    <div class="flex justify-between items-center text-xs font-bold text-gray-500">
+                        <span>@poly_master</span>
+                        <i data-lucide="download" class="w-4 h-4"></i>
+                    </div>
+                </div>
+
+                 <!-- LoRA Card 4 -->
+                 <div class="bg-white border-4 border-black rounded-xl p-3 shadow-hard hover:shadow-hard-hover cursor-pointer group">
+                    <div class="aspect-square bg-gray-200 border-2 border-black rounded-lg overflow-hidden mb-3 relative">
+                         <img src="https://images.unsplash.com/photo-1620503374956-c942862f0372?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover">
+                         <div class="absolute bottom-0 left-0 w-full bg-black/70 text-white text-xs p-1 text-center opacity-0 group-hover:opacity-100 transition-opacity">
+                            Trigger: "clay"
+                        </div>
+                    </div>
+                    <h4 class="font-display text-lg leading-tight mb-1">Claymation</h4>
+                    <div class="flex justify-between items-center text-xs font-bold text-gray-500">
+                        <span>@aardman_fan</span>
+                        <i data-lucide="download" class="w-4 h-4"></i>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Train Banner -->
+    <section class="py-20 px-4">
+        <div class="max-w-6xl mx-auto bg-black text-white border-4 border-jungle-green rounded-3xl p-12 relative overflow-hidden shadow-card">
+            <div class="absolute -top-10 -right-10 w-64 h-64 bg-monster-purple rounded-full blur-3xl opacity-50"></div>
+            <div class="relative z-10 text-center">
+                <h2 class="font-display text-5xl mb-6">Got Your Own Style?</h2>
+                <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+                    Train your own model (LoRA) in minutes. Upload 10-20 photos and let our engines learn your unique aesthetic.
+                </p>
+                <button class="brutal-btn bg-acid-yellow text-black font-bold text-2xl px-10 py-4 rounded-full border-4 border-white hover:bg-white">
+                    Start Training
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white pt-16 pb-8 border-t-4 border-jungle-green">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+            <div class="col-span-1 md:col-span-2">
+                <div class="flex items-center gap-2 mb-4">
+                     <span class="font-display text-4xl uppercase italic text-white" style="text-shadow: 3px 3px 0px #DFFF00;">Mika</span>
+                </div>
+                <p class="text-gray-400 font-bold max-w-sm">
+                    We empower everyone to be an artist. Mika is the premier AI creative hub for generation and photo editing. Do not go gentle into that good night—go create!
+                </p>
+            </div>
+            <div>
+                <h4 class="font-display text-xl text-acid-yellow mb-4">Explore</h4>
+                <ul class="space-y-2 font-bold text-gray-400">
+                    <li><a href="gallery.html" class="hover:text-white">Gallery</a></li>
+                    <li><a href="models.html" class="hover:text-white text-white">Models</a></li>
+                    <li><a href="challenges.html" class="hover:text-white">Challenges</a></li>
+                    <li><a href="pricing.html" class="hover:text-white">Pricing</a></li>
+                    <li><a href="api_docs.html" class="hover:text-white">API Docs</a></li>
+                    <li><a href="#" class="hover:text-white">Blog</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-display text-xl text-acid-yellow mb-4">Links</h4>
+                <div class="flex gap-4">
+                    <a href="#" class="w-10 h-10 bg-white text-black rounded-lg flex items-center justify-center hover:bg-acid-yellow transition-colors">
+                        <i data-lucide="twitter" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white text-black rounded-lg flex items-center justify-center hover:bg-acid-yellow transition-colors">
+                        <i data-lucide="instagram" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white text-black rounded-lg flex items-center justify-center hover:bg-acid-yellow transition-colors">
+                        <i data-lucide="github" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="text-center border-t border-gray-800 pt-8 font-bold text-gray-500">
+            &copy; 2023 Mika Inc. Stay Electric.
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
+
