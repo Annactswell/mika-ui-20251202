@@ -86,12 +86,14 @@
             transform: translate(2px, 2px);
         }
         
-        /* Style Radio Button Logic */
-        .style-radio:checked + label {
+        /* Style/Template Radio Button Logic */
+        .style-radio:checked + label,
+        .template-radio:checked + label {
             border-color: #000;
             background-color: #DFFF00;
         }
-        .style-radio:checked + label .check-icon {
+        .style-radio:checked + label .check-icon,
+        .template-radio:checked + label .check-icon {
             opacity: 1;
         }
 
@@ -210,7 +212,7 @@
                         </button>
 
                         <!-- Dropdown List -->
-                        <div id="modelDropdown" class="hidden absolute top-full left-0 w-full bg-white border-4 border-black rounded-xl mt-2 shadow-hard z-50 overflow-hidden animate__animated animate__fadeIn">
+                        <div id="modelDropdown" class="hidden absolute top-full left-0 w-full bg-white border-4 border-black rounded-xl mt-2 shadow-hard z-50 overflow-hidden">
                             <div class="max-h-60 overflow-y-auto">
                                 <div class="model-option p-4 hover:bg-acid-yellow cursor-pointer border-b-2 border-black last:border-0 font-bold flex items-center gap-2" data-value="Mika Realism V5 (Default)">
                                     <span class="w-3 h-3 rounded-full bg-jungle-green"></span> Mika Realism V5 (Default)
@@ -237,34 +239,31 @@
                     <div class="flex justify-between items-end">
                         <label class="font-display text-xl uppercase">Prompt</label>
                         <div class="flex gap-2">
-                            <button class="text-xs font-bold bg-monster-purple text-white px-2 py-1 rounded border border-black hover:bg-black flex items-center gap-1" onclick="magicExpand()">
-                                <i data-lucide="sparkles" class="w-3 h-3"></i> Magic
+                            <button class="w-10 h-10 rounded-lg border-2 border-black bg-monster-purple text-white hover:bg-black shadow-hard-hover active:shadow-none active:translate-x-[2px] active:translate-y-[2px] transition-all flex items-center justify-center" onclick="magicExpand()" title="Magic Expand">
+                                <i data-lucide="sparkles" class="w-5 h-5"></i>
                             </button>
-                            <button class="text-xs font-bold bg-gray-200 px-2 py-1 rounded border border-black hover:bg-acid-yellow flex items-center gap-1" onclick="randomizePrompt()">
-                                <i data-lucide="dices" class="w-3 h-3"></i> Random
+                            <button class="w-10 h-10 rounded-lg border-2 border-black bg-gray-200 hover:bg-acid-yellow shadow-hard-hover active:shadow-none active:translate-x-[2px] active:translate-y-[2px] transition-all flex items-center justify-center" onclick="randomizePrompt()" title="Random Prompt">
+                                <i data-lucide="dices" class="w-5 h-5"></i>
                             </button>
                         </div>
                     </div>
                     <textarea id="promptInput" class="w-full h-32 p-4 bg-soft-cream border-4 border-black rounded-xl font-bold text-lg resize-none focus:outline-none focus:ring-4 focus:ring-acid-yellow/50 shadow-inner-hard" placeholder="Describe your electric dream..."></textarea>
-                    
-                    <!-- Negative Prompt Toggle -->
-                    <div class="pt-1">
-                        <button id="toggleNegBtn" class="text-xs font-bold text-gray-500 hover:text-black flex items-center gap-1 transition-colors">
-                            <i data-lucide="minus-circle" class="w-3 h-3"></i> Add Negative Prompt
-                        </button>
-                        <textarea id="negPromptInput" class="hidden w-full h-24 mt-2 p-3 bg-gray-100 border-2 border-black rounded-lg font-bold text-sm resize-none focus:outline-none animate__animated animate__fadeIn" placeholder="Negative prompt (e.g. ugly, bad anatomy, blurry, low quality)..."></textarea>
-                    </div>
                 </div>
 
                 <!-- Image Reference Upload -->
                 <div class="space-y-2">
                     <label class="font-display text-xl uppercase flex items-center gap-2">
-                        Ref Image
-                        <span class="text-xs bg-black text-white px-2 py-0.5 rounded-full">Optional</span>
+                        Ref Images
+                        <span class="text-xs bg-black text-white px-2 py-0.5 rounded-full" id="refCount">Optional</span>
                     </label>
-                    <div class="border-4 border-dashed border-gray-300 rounded-xl p-6 text-center hover:border-black hover:bg-gray-50 transition-colors cursor-pointer group">
-                        <i data-lucide="image-up" class="w-8 h-8 mx-auto mb-2 text-gray-400 group-hover:text-black"></i>
-                        <p class="font-bold text-sm text-gray-500 group-hover:text-black">Drop image here or click to upload</p>
+                    <div id="dropZone" class="border-4 border-dashed border-gray-300 rounded-xl p-6 text-center hover:border-black hover:bg-gray-50 transition-colors cursor-pointer group relative">
+                        <input type="file" id="fileInput" multiple accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
+                        <div id="uploadPlaceholder">
+                            <i data-lucide="image-up" class="w-8 h-8 mx-auto mb-2 text-gray-400 group-hover:text-black"></i>
+                            <p class="font-bold text-sm text-gray-500 group-hover:text-black">Drop images here or click</p>
+                        </div>
+                        <!-- Thumbnails Container -->
+                        <div id="thumbnailsGrid" class="hidden grid grid-cols-3 gap-2 mt-2 pointer-events-none"></div>
                     </div>
                 </div>
 
@@ -274,79 +273,72 @@
                     <!-- Aspect Ratio -->
                     <div>
                         <label class="font-display text-lg uppercase block mb-3">Aspect Ratio</label>
-                        <div class="flex gap-3">
-                            <div class="flex-1">
-                                <input type="radio" name="aspect" id="ratio-1" class="hidden ratio-radio" checked>
-                                <label for="ratio-1" class="flex flex-col items-center justify-center border-4 border-black rounded-lg p-3 cursor-pointer hover:bg-gray-50 transition-all bg-white h-20 shadow-hard-hover">
-                                    <div class="w-6 h-6 border-2 border-black bg-gray-200 mb-1"></div>
-                                    <span class="text-xs font-bold">1:1</span>
-                                </label>
-                            </div>
-                            <div class="flex-1">
-                                <input type="radio" name="aspect" id="ratio-2" class="hidden ratio-radio">
-                                <label for="ratio-2" class="flex flex-col items-center justify-center border-4 border-black rounded-lg p-3 cursor-pointer hover:bg-gray-50 transition-all bg-white h-20 shadow-hard-hover">
-                                    <div class="w-8 h-5 border-2 border-black bg-gray-200 mb-1"></div>
-                                    <span class="text-xs font-bold">16:9</span>
-                                </label>
-                            </div>
-                            <div class="flex-1">
-                                <input type="radio" name="aspect" id="ratio-3" class="hidden ratio-radio">
-                                <label for="ratio-3" class="flex flex-col items-center justify-center border-4 border-black rounded-lg p-3 cursor-pointer hover:bg-gray-50 transition-all bg-white h-20 shadow-hard-hover">
-                                    <div class="w-5 h-8 border-2 border-black bg-gray-200 mb-1"></div>
-                                    <span class="text-xs font-bold">9:16</span>
-                                </label>
+                        <div class="relative">
+                            <select id="aspectRatioSelect" class="w-full p-4 bg-white border-4 border-black rounded-xl font-bold text-lg appearance-none focus:outline-none focus:ring-4 focus:ring-acid-yellow/50 shadow-hard cursor-pointer">
+                                <option value="1:1">1:1 (Square)</option>
+                                <option value="16:9">16:9 (Landscape)</option>
+                                <option value="9:16">9:16 (Portrait)</option>
+                                <option value="3:4">3:4 (Portrait)</option>
+                                <option value="4:3">4:3 (Landscape)</option>
+                                <option value="2:3">2:3 (Classic Portrait)</option>
+                                <option value="3:2">3:2 (Classic Landscape)</option>
+                                <option value="5:4">5:4 (Medium Format)</option>
+                                <option value="4:5">4:5 (Instagram Portrait)</option>
+                                <option value="21:9">21:9 (Ultrawide)</option>
+                            </select>
+                            <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none">
+                                <i data-lucide="chevron-down" class="w-6 h-6"></i>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Style Presets -->
+                    <!-- Template Selection -->
                     <div>
-                        <label class="font-display text-lg uppercase block mb-3">Style</label>
+                        <div class="flex justify-between items-center mb-3">
+                            <label class="font-display text-lg uppercase">Template</label>
+                            <a href="templates.html" class="text-xs font-bold underline hover:text-jungle-green">View All</a>
+                        </div>
                         <div class="grid grid-cols-2 gap-3">
-                            <!-- Style 1 -->
+                            <!-- Template: None -->
                             <div class="relative">
-                                <input type="radio" name="style" id="style-1" class="hidden style-radio" checked>
-                                <label for="style-1" class="block border-4 border-black rounded-lg p-2 cursor-pointer bg-white hover:-translate-y-1 transition-transform overflow-hidden relative h-24 group">
+                                <input type="radio" name="template" id="template-none" class="hidden template-radio" checked data-prompt="">
+                                <label for="template-none" class="block border-4 border-black rounded-lg p-2 cursor-pointer bg-white hover:-translate-y-1 transition-transform h-24 group flex flex-col items-center justify-center text-center shadow-hard-hover">
+                                    <i data-lucide="ban" class="w-6 h-6 mb-1 text-gray-400 group-hover:text-black"></i>
+                                    <span class="font-bold text-xs">None</span>
+                                </label>
+                            </div>
+                            <!-- Template: Cyberpunk -->
+                            <div class="relative">
+                                <input type="radio" name="template" id="template-1" class="hidden template-radio" data-prompt="Futuristic cyberpunk city, neon lights, high contrast, rain slicked streets, detailed environment, 8k resolution">
+                                <label for="template-1" class="block border-4 border-black rounded-lg p-0 cursor-pointer bg-white hover:-translate-y-1 transition-transform overflow-hidden relative h-24 group shadow-hard-hover">
                                     <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity">
                                     <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-                                    <span class="absolute bottom-2 left-2 text-white font-bold text-sm z-10">Mika V5</span>
-                                    <div class="check-icon absolute top-2 right-2 bg-acid-yellow rounded-full p-0.5 opacity-0 transition-opacity">
+                                    <span class="absolute bottom-2 left-2 text-white font-bold text-xs z-10">Cyberpunk</span>
+                                    <div class="check-icon absolute top-1 right-1 bg-acid-yellow rounded-full p-0.5 opacity-0 transition-opacity">
                                         <i data-lucide="check" class="w-3 h-3 text-black"></i>
                                     </div>
                                 </label>
                             </div>
-                            <!-- Style 2 -->
+                            <!-- Template: Anime -->
                             <div class="relative">
-                                <input type="radio" name="style" id="style-2" class="hidden style-radio">
-                                <label for="style-2" class="block border-4 border-black rounded-lg p-2 cursor-pointer bg-white hover:-translate-y-1 transition-transform overflow-hidden relative h-24 group">
+                                <input type="radio" name="template" id="template-2" class="hidden template-radio" data-prompt="Anime style illustration, vibrant colors, highly detailed, character portrait, studio ghibli inspired, soft lighting">
+                                <label for="template-2" class="block border-4 border-black rounded-lg p-0 cursor-pointer bg-white hover:-translate-y-1 transition-transform overflow-hidden relative h-24 group shadow-hard-hover">
                                     <img src="https://images.unsplash.com/photo-1563089145-599997674d42?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity">
                                     <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-                                    <span class="absolute bottom-2 left-2 text-white font-bold text-sm z-10">Anime</span>
-                                    <div class="check-icon absolute top-2 right-2 bg-acid-yellow rounded-full p-0.5 opacity-0 transition-opacity">
+                                    <span class="absolute bottom-2 left-2 text-white font-bold text-xs z-10">Anime</span>
+                                    <div class="check-icon absolute top-1 right-1 bg-acid-yellow rounded-full p-0.5 opacity-0 transition-opacity">
                                         <i data-lucide="check" class="w-3 h-3 text-black"></i>
                                     </div>
                                 </label>
                             </div>
-                            <!-- Style 3 -->
-                            <div class="relative">
-                                <input type="radio" name="style" id="style-3" class="hidden style-radio">
-                                <label for="style-3" class="block border-4 border-black rounded-lg p-2 cursor-pointer bg-white hover:-translate-y-1 transition-transform overflow-hidden relative h-24 group">
+                             <!-- Template: 3D Render -->
+                             <div class="relative">
+                                <input type="radio" name="template" id="template-3" class="hidden template-radio" data-prompt="3D abstract render, glass dispersion, iridescent materials, octane render, ray tracing, minimal composition, 4k">
+                                <label for="template-3" class="block border-4 border-black rounded-lg p-0 cursor-pointer bg-white hover:-translate-y-1 transition-transform overflow-hidden relative h-24 group shadow-hard-hover">
                                     <img src="https://images.unsplash.com/photo-1618172193763-c511deb635ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity">
                                     <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-                                    <span class="absolute bottom-2 left-2 text-white font-bold text-sm z-10">3D Render</span>
-                                    <div class="check-icon absolute top-2 right-2 bg-acid-yellow rounded-full p-0.5 opacity-0 transition-opacity">
-                                        <i data-lucide="check" class="w-3 h-3 text-black"></i>
-                                    </div>
-                                </label>
-                            </div>
-                             <!-- Style 4 -->
-                             <div class="relative">
-                                <input type="radio" name="style" id="style-4" class="hidden style-radio">
-                                <label for="style-4" class="block border-4 border-black rounded-lg p-2 cursor-pointer bg-white hover:-translate-y-1 transition-transform overflow-hidden relative h-24 group">
-                                    <img src="https://images.unsplash.com/photo-1549490349-8643362247b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-                                    <span class="absolute bottom-2 left-2 text-white font-bold text-sm z-10">Oil Painting</span>
-                                    <div class="check-icon absolute top-2 right-2 bg-acid-yellow rounded-full p-0.5 opacity-0 transition-opacity">
+                                    <span class="absolute bottom-2 left-2 text-white font-bold text-xs z-10">3D Render</span>
+                                    <div class="check-icon absolute top-1 right-1 bg-acid-yellow rounded-full p-0.5 opacity-0 transition-opacity">
                                         <i data-lucide="check" class="w-3 h-3 text-black"></i>
                                     </div>
                                 </label>
@@ -356,14 +348,6 @@
 
                     <!-- Sliders Group -->
                     <div class="space-y-6">
-                        <!-- Guidance Scale -->
-                        <div>
-                            <div class="flex justify-between mb-1">
-                                 <label class="font-display text-sm uppercase">Guidance Scale</label>
-                                 <span class="font-bold text-sm">7.0</span>
-                            </div>
-                            <input type="range" min="1" max="20" value="7" class="w-full">
-                        </div>
 
                         <!-- Batch Count -->
                         <div>
@@ -382,7 +366,7 @@
 
                 <!-- Generate Button -->
                 <div class="pt-4">
-                    <button id="generateBtn" class="brutal-btn w-full bg-jungle-green text-acid-yellow font-display text-2xl py-4 rounded-xl border-4 border-black shadow-hard hover:shadow-hard-hover hover:bg-black hover:text-white flex items-center justify-center gap-3">
+                    <button id="generateBtn" class="brutal-btn w-full bg-jungle-green text-acid-yellow font-display text-2xl py-4 rounded-xl border-4 border-black shadow-hard hover:shadow-hard-hover hover:bg-acid-yellow hover:text-black flex items-center justify-center gap-3">
                         <i data-lucide="zap" class="w-6 h-6 fill-current"></i>
                         GENERATE
                         <span class="text-sm font-sans bg-black/20 px-2 py-1 rounded">-2 Credits</span>
@@ -639,21 +623,6 @@
         if(openSettingsBtn) openSettingsBtn.addEventListener('click', toggleSettings);
         if(closeSettingsBtn) closeSettingsBtn.addEventListener('click', toggleSettings);
 
-        // 2. Negative Prompt Toggle
-        const toggleNegBtn = document.getElementById('toggleNegBtn');
-        const negPromptInput = document.getElementById('negPromptInput');
-        
-        toggleNegBtn.addEventListener('click', () => {
-            negPromptInput.classList.toggle('hidden');
-            if (!negPromptInput.classList.contains('hidden')) {
-                negPromptInput.focus();
-                toggleNegBtn.innerHTML = '<i data-lucide="minus-circle" class="w-3 h-3"></i> Hide Negative Prompt';
-            } else {
-                toggleNegBtn.innerHTML = '<i data-lucide="plus-circle" class="w-3 h-3"></i> Add Negative Prompt';
-            }
-            lucide.createIcons();
-        });
-
         // 3. Magic Expand (Simulation)
         function magicExpand() {
             const input = document.getElementById('promptInput');
@@ -734,6 +703,107 @@
             }
         });
 
+
+        // 5. Multi-Image Reference Logic
+        const fileInput = document.getElementById('fileInput');
+        const dropZone = document.getElementById('dropZone');
+        const thumbnailsGrid = document.getElementById('thumbnailsGrid');
+        const uploadPlaceholder = document.getElementById('uploadPlaceholder');
+        const refCountLabel = document.getElementById('refCount');
+        
+        let refImages = [];
+
+        function updateThumbnails() {
+            thumbnailsGrid.innerHTML = '';
+            refImages.forEach((file, index) => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const div = document.createElement('div');
+                    div.className = 'relative aspect-square border-2 border-black rounded-lg overflow-hidden group pointer-events-auto';
+                    div.innerHTML = `
+                        <img src="${e.target.result}" class="w-full h-full object-cover">
+                        <button onclick="removeRefImage(event, ${index})" class="absolute top-0.5 right-0.5 bg-red-500 text-white p-0.5 rounded hover:bg-red-600 z-20">
+                            <i data-lucide="x" class="w-3 h-3"></i>
+                        </button>
+                    `;
+                    thumbnailsGrid.appendChild(div);
+                    lucide.createIcons();
+                };
+                reader.readAsDataURL(file);
+            });
+
+            if (refImages.length === 0) {
+                refCountLabel.innerText = 'Optional';
+            } else {
+                refCountLabel.innerText = `${refImages.length}/9`;
+            }
+
+            if (refImages.length > 0) {
+                uploadPlaceholder.classList.add('hidden');
+                dropZone.classList.remove('p-6');
+                dropZone.classList.add('p-2');
+                thumbnailsGrid.classList.remove('hidden');
+            } else {
+                uploadPlaceholder.classList.remove('hidden');
+                dropZone.classList.add('p-6');
+                dropZone.classList.remove('p-2');
+                thumbnailsGrid.classList.add('hidden');
+            }
+        }
+
+        function handleFiles(files) {
+            const remaining = 9 - refImages.length;
+            if (remaining <= 0) {
+                alert("Maximum 9 images allowed.");
+                return;
+            }
+
+            const newFiles = Array.from(files).slice(0, remaining);
+            refImages = [...refImages, ...newFiles];
+            updateThumbnails();
+        }
+
+        function removeRefImage(event, index) {
+            event.preventDefault(); // Prevent triggering file input
+            event.stopPropagation();
+            refImages.splice(index, 1);
+            updateThumbnails();
+        }
+
+        fileInput.addEventListener('change', (e) => {
+            handleFiles(e.target.files);
+            // Reset input so same file can be selected again if deleted
+            fileInput.value = ''; 
+        });
+
+        // Drag and Drop visual feedback
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('bg-acid-yellow/20', 'border-black');
+        });
+
+        dropZone.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('bg-acid-yellow/20', 'border-black');
+        });
+
+        // 6. Template Logic
+        const templateRadios = document.querySelectorAll('input[name="template"]');
+        const promptInput = document.getElementById('promptInput');
+
+        templateRadios.forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                const prompt = e.target.dataset.prompt;
+                if (prompt) {
+                    promptInput.value = prompt;
+                    // Add highlight effect
+                    promptInput.classList.add('bg-acid-yellow/20');
+                    setTimeout(() => promptInput.classList.remove('bg-acid-yellow/20'), 300);
+                } else {
+                    // Clear prompt if None selected
+                    promptInput.value = '';
+                }
+            });
+        });
+
     </script>
-</body>
-</html>
