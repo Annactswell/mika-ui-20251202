@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mika Models | All Engines</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;900&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'acid-yellow': '#DFFF00',
+                        'jungle-green': '#00684A',
+                        'soft-cream': '#FFFDF5',
+                        'monster-purple': '#9D4EDD',
+                        'hot-pink': '#FF0099',
+                        'electric-blue': '#4361EE',
+                    },
+                    fontFamily: {
+                        'display': ['"Poppins"', 'sans-serif'],
+                        'body': ['"Inter"', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'hard': '5px 5px 0px 0px #000000',
+                        'hard-hover': '2px 2px 0px 0px #000000',
+                        'card': '8px 8px 0px 0px #000000',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        ::-webkit-scrollbar { width: 12px; }
+        ::-webkit-scrollbar-track { background: #FFFDF5; border-left: 3px solid black; }
+        ::-webkit-scrollbar-thumb { background: #00684A; border: 3px solid black; }
+        ::-webkit-scrollbar-thumb:hover { background: #DFFF00; }
+
+        .doodle-bg {
+            background-image: radial-gradient(#000 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .brutal-btn { transition: all 0.1s ease; }
+        .brutal-btn:active { transform: translate(4px, 4px); box-shadow: 0px 0px 0px 0px #000000; }
+        
+        /* Tech Badge Style */
+        .tech-badge {
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            letter-spacing: -0.5px;
+        }
+    </style>
+</head>
+<body class="bg-soft-cream font-body text-black overflow-x-hidden">
+
+    <!-- Top Navigation -->
+    <nav class="fixed w-full top-0 z-50 border-b-4 border-black bg-acid-yellow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center gap-2 cursor-pointer group hover:scale-105 transition-transform">
+                    <span class="font-display text-5xl tracking-widest uppercase italic" style="text-shadow: 4px 4px 0px #FFF;">Mika</span>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8 font-bold text-lg">
+                    <a href="templates.html" class="hover:text-jungle-green hover:underline decoration-4 decoration-jungle-green underline-offset-4">Templates</a>
+                    <a href="gallery.html" class="hover:text-jungle-green hover:underline decoration-4 decoration-jungle-green underline-offset-4">Gallery</a>
+                    <a href="models.html" class="text-jungle-green underline decoration-4 decoration-jungle-green underline-offset-4">Models</a>
+                    <a href="challenges.html" class="hover:text-jungle-green hover:underline decoration-4 decoration-jungle-green underline-offset-4">Challenges</a>
+                    <a href="library.html" class="hover:text-jungle-green hover:underline decoration-4 decoration-jungle-green underline-offset-4">Library</a>
+                    <a href="create.html" class="brutal-btn bg-jungle-green text-acid-yellow px-6 py-2 rounded-full border-2 border-black shadow-hard hover:shadow-hard-hover transform hover:-translate-y-0.5">
+                        Create Now
+                    </a>
+                    <a href="profile.html" class="w-10 h-10 rounded-full bg-monster-purple border-2 border-black overflow-hidden hover:scale-110 transition-transform">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="User" class="w-full h-full object-cover">
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button class="p-2 border-2 border-black bg-white shadow-hard rounded-md">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search & Filter Header -->
+    <header class="pt-32 pb-8 px-4 relative border-b-4 border-black bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6 mb-8">
+                <h1 class="font-display text-5xl md:text-6xl">All Models</h1>
+                <div class="w-full md:w-auto flex-1 max-w-xl relative">
+                    <input type="text" placeholder="Search models, styles, or tags..." class="w-full border-4 border-black rounded-xl p-4 font-bold text-lg shadow-hard focus:outline-none focus:bg-acid-yellow transition-colors">
+                    <button class="absolute right-4 top-1/2 transform -translate-y-1/2">
+                        <i data-lucide="search" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Filter Tags -->
+            <div class="flex gap-3 overflow-x-auto pb-4 scrollbar-hide">
+                <button class="px-6 py-2 bg-black text-white rounded-full font-bold border-2 border-black whitespace-nowrap">All Models</button>
+                <button class="px-6 py-2 bg-white text-black rounded-full font-bold border-2 border-black hover:bg-acid-yellow whitespace-nowrap">Official</button>
+                <button class="px-6 py-2 bg-white text-black rounded-full font-bold border-2 border-black hover:bg-acid-yellow whitespace-nowrap">Community LoRAs</button>
+                <button class="px-6 py-2 bg-white text-black rounded-full font-bold border-2 border-black hover:bg-acid-yellow whitespace-nowrap">Realistic</button>
+                <button class="px-6 py-2 bg-white text-black rounded-full font-bold border-2 border-black hover:bg-acid-yellow whitespace-nowrap">Anime</button>
+                <button class="px-6 py-2 bg-white text-black rounded-full font-bold border-2 border-black hover:bg-acid-yellow whitespace-nowrap">3D / CGI</button>
+                <button class="px-6 py-2 bg-white text-black rounded-full font-bold border-2 border-black hover:bg-acid-yellow whitespace-nowrap">Pixel Art</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Models Grid -->
+    <section class="py-12 px-4 max-w-7xl mx-auto min-h-screen">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            
+            <!-- Model Card 1 -->
+            <div class="bg-white border-4 border-black rounded-2xl overflow-hidden shadow-card hover:-translate-y-2 transition-transform duration-300 group">
+                <div class="h-48 relative border-b-4 border-black overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute top-2 left-2 bg-acid-yellow border-2 border-black px-2 py-0.5 text-xs font-bold uppercase">
+                        Official
+                    </div>
+                </div>
+                <div class="p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-display text-xl">Mika Realism V5</h3>
+                        <span class="tech-badge bg-gray-200 px-1.5 py-0.5 border border-black text-[10px]">FP16</span>
+                    </div>
+                    <p class="font-bold text-gray-600 mb-4 text-xs line-clamp-2">
+                        Our most advanced photorealistic model. Perfect for portraits and landscapes.
+                    </p>
+                    <div class="flex justify-between items-center pt-2 border-t-2 border-black">
+                        <div class="text-xs font-bold text-gray-500">
+                            <i data-lucide="users" class="w-3 h-3 inline mr-1"></i> 2.5k
+                        </div>
+                        <a href="create.html?model=mika-realism-v5" class="brutal-btn bg-black text-white px-3 py-1.5 rounded font-bold text-xs hover:bg-jungle-green">
+                            Use Model
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Model Card 2 -->
+            <div class="bg-white border-4 border-black rounded-2xl overflow-hidden shadow-card hover:-translate-y-2 transition-transform duration-300 group">
+                <div class="h-48 relative border-b-4 border-black overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1578632767115-351597cf2477?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute top-2 left-2 bg-hot-pink text-white border-2 border-black px-2 py-0.5 text-xs font-bold uppercase">
+                        Official
+                    </div>
+                </div>
+                <div class="p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-display text-xl">Niji Electric</h3>
+                        <span class="tech-badge bg-gray-200 px-1.5 py-0.5 border border-black text-[10px]">V4.0</span>
+                    </div>
+                    <p class="font-bold text-gray-600 mb-4 text-xs line-clamp-2">
+                        Specialized for 2D illustration and anime styles. Bold lines and colors.
+                    </p>
+                    <div class="flex justify-between items-center pt-2 border-t-2 border-black">
+                         <div class="text-xs font-bold text-gray-500">
+                            <i data-lucide="users" class="w-3 h-3 inline mr-1"></i> 5.1k
+                        </div>
+                        <a href="create.html?model=niji-electric" class="brutal-btn bg-black text-white px-3 py-1.5 rounded font-bold text-xs hover:bg-jungle-green">
+                            Use Model
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+             <!-- Model Card 3 -->
+             <div class="bg-white border-4 border-black rounded-2xl overflow-hidden shadow-card hover:-translate-y-2 transition-transform duration-300 group">
+                <div class="h-48 relative border-b-4 border-black overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1633596683562-4a4697de791c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                     <div class="absolute top-2 left-2 bg-electric-blue text-white border-2 border-black px-2 py-0.5 text-xs font-bold uppercase">
+                        Official
+                    </div>
+                </div>
+                <div class="p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-display text-xl">Poly-Perfect 3D</h3>
+                        <span class="tech-badge bg-gray-200 px-1.5 py-0.5 border border-black text-[10px]">SDXL</span>
+                    </div>
+                    <p class="font-bold text-gray-600 mb-4 text-xs line-clamp-2">
+                         Generates stunning 3D renders with isometric views and textures.
+                    </p>
+                    <div class="flex justify-between items-center pt-2 border-t-2 border-black">
+                         <div class="text-xs font-bold text-gray-500">
+                            <i data-lucide="users" class="w-3 h-3 inline mr-1"></i> 800
+                        </div>
+                        <a href="create.html?model=poly-perfect" class="brutal-btn bg-black text-white px-3 py-1.5 rounded font-bold text-xs hover:bg-jungle-green">
+                            Use Model
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Model Card 4: Community LoRA -->
+            <div class="bg-white border-4 border-black rounded-2xl overflow-hidden shadow-card hover:-translate-y-2 transition-transform duration-300 group">
+                <div class="h-48 relative border-b-4 border-black overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute top-2 left-2 bg-white border-2 border-black px-2 py-0.5 text-xs font-bold uppercase">
+                        LoRA
+                    </div>
+                </div>
+                <div class="p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-display text-xl">Vaporwave 90s</h3>
+                        <span class="tech-badge bg-gray-200 px-1.5 py-0.5 border border-black text-[10px]">V1.0</span>
+                    </div>
+                    <p class="font-bold text-gray-600 mb-4 text-xs line-clamp-2">
+                         Nostalgic 90s aesthetic with neon grids and palm trees.
+                    </p>
+                    <div class="flex justify-between items-center pt-2 border-t-2 border-black">
+                        <div class="flex items-center gap-2 text-xs font-bold text-gray-500">
+                             <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=retro" class="w-5 h-5 rounded-full border border-black">
+                             <span>@retro_king</span>
+                        </div>
+                        <a href="create.html?model=vaporwave" class="brutal-btn bg-white text-black border-2 border-black px-3 py-1.5 rounded font-bold text-xs hover:bg-acid-yellow">
+                            Use Model
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Model Card 5 -->
+            <div class="bg-white border-4 border-black rounded-2xl overflow-hidden shadow-card hover:-translate-y-2 transition-transform duration-300 group">
+                <div class="h-48 relative border-b-4 border-black overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute top-2 left-2 bg-white border-2 border-black px-2 py-0.5 text-xs font-bold uppercase">
+                        LoRA
+                    </div>
+                </div>
+                <div class="p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-display text-xl">Pencil Sketch</h3>
+                        <span class="tech-badge bg-gray-200 px-1.5 py-0.5 border border-black text-[10px]">V2.1</span>
+                    </div>
+                    <p class="font-bold text-gray-600 mb-4 text-xs line-clamp-2">
+                         Realistic pencil drawing effect with cross-hatching.
+                    </p>
+                     <div class="flex justify-between items-center pt-2 border-t-2 border-black">
+                        <div class="flex items-center gap-2 text-xs font-bold text-gray-500">
+                             <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=sketch" class="w-5 h-5 rounded-full border border-black">
+                             <span>@artist_x</span>
+                        </div>
+                        <a href="create.html?model=sketch" class="brutal-btn bg-white text-black border-2 border-black px-3 py-1.5 rounded font-bold text-xs hover:bg-acid-yellow">
+                            Use Model
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Model Card 6 -->
+            <div class="bg-white border-4 border-black rounded-2xl overflow-hidden shadow-card hover:-translate-y-2 transition-transform duration-300 group">
+                <div class="h-48 relative border-b-4 border-black overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                     <div class="absolute top-2 left-2 bg-white border-2 border-black px-2 py-0.5 text-xs font-bold uppercase">
+                        LoRA
+                    </div>
+                </div>
+                <div class="p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-display text-xl">Low Poly God</h3>
+                         <span class="tech-badge bg-gray-200 px-1.5 py-0.5 border border-black text-[10px]">V1.5</span>
+                    </div>
+                    <p class="font-bold text-gray-600 mb-4 text-xs line-clamp-2">
+                         Minimalist low poly 3D style for game assets.
+                    </p>
+                     <div class="flex justify-between items-center pt-2 border-t-2 border-black">
+                        <div class="flex items-center gap-2 text-xs font-bold text-gray-500">
+                             <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=poly" class="w-5 h-5 rounded-full border border-black">
+                             <span>@poly_master</span>
+                        </div>
+                        <a href="create.html?model=lowpoly" class="brutal-btn bg-white text-black border-2 border-black px-3 py-1.5 rounded font-bold text-xs hover:bg-acid-yellow">
+                            Use Model
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+             <!-- Model Card 7 -->
+             <div class="bg-white border-4 border-black rounded-2xl overflow-hidden shadow-card hover:-translate-y-2 transition-transform duration-300 group">
+                <div class="h-48 relative border-b-4 border-black overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1620503374956-c942862f0372?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute top-2 left-2 bg-white border-2 border-black px-2 py-0.5 text-xs font-bold uppercase">
+                        LoRA
+                    </div>
+                </div>
+                <div class="p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-display text-xl">Claymation</h3>
+                        <span class="tech-badge bg-gray-200 px-1.5 py-0.5 border border-black text-[10px]">V1.0</span>
+                    </div>
+                    <p class="font-bold text-gray-600 mb-4 text-xs line-clamp-2">
+                         Stop-motion clay animation style.
+                    </p>
+                     <div class="flex justify-between items-center pt-2 border-t-2 border-black">
+                        <div class="flex items-center gap-2 text-xs font-bold text-gray-500">
+                             <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=clay" class="w-5 h-5 rounded-full border border-black">
+                             <span>@aardman_fan</span>
+                        </div>
+                        <a href="create.html?model=clay" class="brutal-btn bg-white text-black border-2 border-black px-3 py-1.5 rounded font-bold text-xs hover:bg-acid-yellow">
+                            Use Model
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Model Card 8 -->
+            <div class="bg-white border-4 border-black rounded-2xl overflow-hidden shadow-card hover:-translate-y-2 transition-transform duration-300 group">
+                <div class="h-48 relative border-b-4 border-black overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute top-2 left-2 bg-white border-2 border-black px-2 py-0.5 text-xs font-bold uppercase">
+                        LoRA
+                    </div>
+                </div>
+                <div class="p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-display text-xl">Cyberpunk City</h3>
+                        <span class="tech-badge bg-gray-200 px-1.5 py-0.5 border border-black text-[10px]">V2.0</span>
+                    </div>
+                    <p class="font-bold text-gray-600 mb-4 text-xs line-clamp-2">
+                         Futuristic cityscapes with neon lights and rain.
+                    </p>
+                     <div class="flex justify-between items-center pt-2 border-t-2 border-black">
+                        <div class="flex items-center gap-2 text-xs font-bold text-gray-500">
+                             <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=cyber" class="w-5 h-5 rounded-full border border-black">
+                             <span>@neon_dreamer</span>
+                        </div>
+                        <a href="create.html?model=cyberpunk" class="brutal-btn bg-white text-black border-2 border-black px-3 py-1.5 rounded font-bold text-xs hover:bg-acid-yellow">
+                            Use Model
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+             <!-- Model Card 9 -->
+             <div class="bg-white border-4 border-black rounded-2xl overflow-hidden shadow-card hover:-translate-y-2 transition-transform duration-300 group">
+                <div class="h-48 relative border-b-4 border-black overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1515405295579-ba7a45403062?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute top-2 left-2 bg-white border-2 border-black px-2 py-0.5 text-xs font-bold uppercase">
+                        LoRA
+                    </div>
+                </div>
+                <div class="p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-display text-xl">Watercolor</h3>
+                        <span class="tech-badge bg-gray-200 px-1.5 py-0.5 border border-black text-[10px]">V1.2</span>
+                    </div>
+                    <p class="font-bold text-gray-600 mb-4 text-xs line-clamp-2">
+                         Soft and dreamy watercolor painting style.
+                    </p>
+                     <div class="flex justify-between items-center pt-2 border-t-2 border-black">
+                        <div class="flex items-center gap-2 text-xs font-bold text-gray-500">
+                             <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=paint" class="w-5 h-5 rounded-full border border-black">
+                             <span>@art_lover</span>
+                        </div>
+                        <a href="create.html?model=watercolor" class="brutal-btn bg-white text-black border-2 border-black px-3 py-1.5 rounded font-bold text-xs hover:bg-acid-yellow">
+                            Use Model
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Pagination -->
+        <div class="flex justify-center items-center gap-4 mt-12">
+            <button class="w-10 h-10 flex items-center justify-center border-2 border-black bg-white rounded-lg font-bold hover:bg-black hover:text-white disabled:opacity-50">
+                <i data-lucide="chevron-left" class="w-5 h-5"></i>
+            </button>
+            <span class="font-display font-bold text-lg">Page 1 of 4</span>
+            <button class="w-10 h-10 flex items-center justify-center border-2 border-black bg-black text-white rounded-lg font-bold hover:bg-acid-yellow hover:text-black">
+                <i data-lucide="chevron-right" class="w-5 h-5"></i>
+            </button>
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white pt-16 pb-8 border-t-4 border-jungle-green">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+            <div class="col-span-1 md:col-span-2">
+                <div class="flex items-center gap-2 mb-4">
+                     <span class="font-display text-4xl uppercase italic text-white" style="text-shadow: 3px 3px 0px #DFFF00;">Mika</span>
+                </div>
+                <p class="text-gray-400 font-bold max-w-sm">
+                    We empower everyone to be an artist. Mika is the premier AI creative hub for generation and photo editing. Do not go gentle into that good night—go create!
+                </p>
+            </div>
+            <div>
+                <h4 class="font-display text-xl text-acid-yellow mb-4">Explore</h4>
+                <ul class="space-y-2 font-bold text-gray-400">
+                    <li><a href="templates.html" class="hover:text-white">Templates</a></li>
+                    <li><a href="gallery.html" class="hover:text-white">Gallery</a></li>
+                    <li><a href="models.html" class="hover:text-white text-white">Models</a></li>
+                    <li><a href="challenges.html" class="hover:text-white">Challenges</a></li>
+                    <li><a href="pricing.html" class="hover:text-white">Pricing</a></li>
+                    <li><a href="api_docs.html" class="hover:text-white">API Docs</a></li>
+                    <li><a href="blog.html" class="hover:text-white">Blog</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-display text-xl text-acid-yellow mb-4">Links</h4>
+                <div class="flex gap-4">
+                    <a href="#" class="w-10 h-10 bg-white text-black rounded-lg flex items-center justify-center hover:bg-acid-yellow transition-colors">
+                        <i data-lucide="twitter" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white text-black rounded-lg flex items-center justify-center hover:bg-acid-yellow transition-colors">
+                        <i data-lucide="instagram" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white text-black rounded-lg flex items-center justify-center hover:bg-acid-yellow transition-colors">
+                        <i data-lucide="github" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="text-center border-t border-gray-800 pt-8 font-bold text-gray-500">
+            &copy; 2023 Mika Inc. Stay Electric.
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
+
+

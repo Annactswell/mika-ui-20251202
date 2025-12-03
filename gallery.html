@@ -108,13 +108,40 @@
 
                 <!-- Mobile Menu Button -->
                 <div class="md:hidden">
-                    <button class="p-2 border-2 border-black bg-white shadow-hard rounded-md">
+                    <button id="mobile-menu-btn" class="p-2 border-2 border-black bg-white shadow-hard rounded-md">
                         <i data-lucide="menu" class="w-6 h-6"></i>
                     </button>
                 </div>
             </div>
         </div>
     </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 bg-acid-yellow z-50 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col justify-center items-center gap-8 md:hidden">
+        <!-- Close Button -->
+        <button id="close-menu-btn" class="absolute top-6 right-6 p-2 border-2 border-black bg-white shadow-hard rounded-md">
+            <i data-lucide="x" class="w-6 h-6"></i>
+        </button>
+
+        <!-- Links -->
+        <a href="templates.html" class="font-display text-4xl font-bold text-black hover:text-jungle-green hover:underline decoration-4 underline-offset-8">Templates</a>
+        <a href="gallery.html" class="font-display text-4xl font-bold text-black hover:text-jungle-green hover:underline decoration-4 underline-offset-8">Gallery</a>
+        <a href="models.html" class="font-display text-4xl font-bold text-black hover:text-jungle-green hover:underline decoration-4 underline-offset-8">Models</a>
+        <a href="challenges.html" class="font-display text-4xl font-bold text-black hover:text-jungle-green hover:underline decoration-4 underline-offset-8">Challenges</a>
+        <a href="library.html" class="font-display text-4xl font-bold text-black hover:text-jungle-green hover:underline decoration-4 underline-offset-8">Library</a>
+        <a href="blog.html" class="font-display text-4xl font-bold text-black hover:text-jungle-green hover:underline decoration-4 underline-offset-8">Blog</a>
+        
+        <a href="create.html" class="brutal-btn bg-jungle-green text-acid-yellow px-8 py-3 rounded-full border-4 border-black shadow-hard text-2xl font-bold transform hover:-translate-y-1">
+            Create Now
+        </a>
+        
+        <a href="profile.html" class="flex items-center gap-3 mt-4">
+             <div class="w-12 h-12 rounded-full bg-monster-purple border-2 border-black overflow-hidden">
+                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="User" class="w-full h-full object-cover">
+             </div>
+             <span class="font-bold text-xl">My Profile</span>
+        </a>
+    </div>
 
     <!-- Gallery Header -->
     <header class="pt-32 pb-12 px-4 relative doodle-bg border-b-4 border-black">
@@ -320,10 +347,17 @@
             });
         });
 
-        // Mobile Menu Toggle Logic (Simplified for Demo)
-        document.querySelector('.md\\:hidden button').addEventListener('click', () => {
-            alert("Mobile menu would open here!");
-        });
+        // Mobile Menu Toggle Logic
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeBtn = document.getElementById('close-menu-btn');
+
+        function toggleMenu() {
+            mobileMenu.classList.toggle('translate-x-full');
+        }
+
+        if(menuBtn) menuBtn.addEventListener('click', toggleMenu);
+        if(closeBtn) closeBtn.addEventListener('click', toggleMenu);
     </script>
 </body>
 </html>

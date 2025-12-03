@@ -134,11 +134,54 @@
         </div>
     </nav>
 
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 bg-acid-yellow z-50 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col justify-center items-center gap-8 md:hidden">
+        <!-- Close Button -->
+        <button id="close-menu-btn" class="absolute top-6 right-6 p-2 border-2 border-black bg-white shadow-hard rounded-md">
+            <i data-lucide="x" class="w-6 h-6"></i>
+        </button>
+
+        <!-- Links -->
+        <a href="templates.html" class="font-display text-4xl font-bold text-black hover:text-jungle-green hover:underline decoration-4 underline-offset-8">Templates</a>
+        <a href="gallery.html" class="font-display text-4xl font-bold text-black hover:text-jungle-green hover:underline decoration-4 underline-offset-8">Gallery</a>
+        <a href="models.html" class="font-display text-4xl font-bold text-black hover:text-jungle-green hover:underline decoration-4 underline-offset-8">Models</a>
+        <a href="challenges.html" class="font-display text-4xl font-bold text-black hover:text-jungle-green hover:underline decoration-4 underline-offset-8">Challenges</a>
+        <a href="library.html" class="font-display text-4xl font-bold text-black hover:text-jungle-green hover:underline decoration-4 underline-offset-8">Library</a>
+        <a href="blog.html" class="font-display text-4xl font-bold text-black hover:text-jungle-green hover:underline decoration-4 underline-offset-8">Blog</a>
+
+        <!-- Actions -->
+        <div class="flex flex-col gap-4 mt-4">
+             <a href="create.html" class="brutal-btn bg-jungle-green text-acid-yellow px-8 py-3 rounded-full border-2 border-black shadow-hard text-xl font-bold transform hover:-translate-y-1 text-center">
+                Create Now
+            </a>
+            <a href="profile.html" class="brutal-btn bg-white text-black px-8 py-3 rounded-full border-2 border-black shadow-hard text-xl font-bold text-center">
+                My Profile
+            </a>
+        </div>
+    </div>
+
+    <!-- Mobile Settings Toggle FAB -->
+    <button id="openSettingsBtn" class="md:hidden fixed bottom-6 right-6 z-30 w-16 h-16 bg-jungle-green text-acid-yellow border-4 border-black rounded-full shadow-hard flex items-center justify-center animate__animated animate__bounceIn hover:scale-110 transition-transform">
+        <i data-lucide="sliders-horizontal" class="w-8 h-8"></i>
+    </button>
+
     <!-- Main Workspace -->
-    <div class="flex-1 flex flex-col md:flex-row overflow-hidden">
+    <div class="flex-1 flex flex-col md:flex-row overflow-hidden relative">
         
         <!-- Left Sidebar: Edit Controls -->
-        <aside class="w-full md:w-[400px] bg-white border-r-4 border-black p-6 overflow-y-auto z-10 shadow-[4px_0px_0px_0px_rgba(0,0,0,0.1)]">
+        <aside id="settingsPanel" class="fixed inset-x-0 bottom-0 h-[85vh] md:static md:h-auto w-full md:w-[400px] bg-white border-t-4 md:border-t-0 md:border-r-4 border-black p-6 overflow-y-auto z-40 shadow-[0px_-4px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_0px_0px_0px_rgba(0,0,0,0.1)] transform translate-y-full md:translate-y-0 transition-transform duration-300 rounded-t-3xl md:rounded-none">
+            
+            <!-- Mobile Drag Handle / Header -->
+            <div class="md:hidden flex flex-col items-center mb-6">
+                <div class="w-16 h-1.5 bg-gray-300 rounded-full mb-6"></div>
+                <div class="flex justify-between items-center w-full">
+                    <h2 class="font-display text-2xl">Refine Controls</h2>
+                    <button id="closeSettingsBtn" class="p-2 border-2 border-black rounded-lg hover:bg-gray-100">
+                        <i data-lucide="x" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+
             <div class="space-y-8">
                 
                 <div class="bg-acid-yellow border-4 border-black p-4 rounded-xl shadow-hard transform -rotate-1">
@@ -218,25 +261,59 @@
             </div>
 
             <!-- Canvas Viewport -->
-            <div class="flex-1 p-4 md:p-8 overflow-hidden bg-gray-100 flex flex-col md:flex-row gap-6 items-center justify-center" id="viewport">
+            <div class="flex-1 p-4 md:p-8 overflow-hidden bg-gray-100 flex flex-col md:flex-row gap-6 items-center justify-center relative" id="viewport">
                 
+                <!-- Comparison Slider View (Initially Hidden) -->
+                <div id="compareContainer" class="hidden absolute inset-4 md:inset-8 z-20 bg-white border-4 border-black shadow-card overflow-hidden">
+                     <!-- Original Image (Bottom) -->
+                     <img id="compareOriginal" src="" class="absolute inset-0 w-full h-full object-contain bg-gray-100">
+                     
+                     <!-- Result Image (Top - Clipped) -->
+                     <div id="compareOverlay" class="absolute inset-0 w-1/2 overflow-hidden border-r-4 border-acid-yellow bg-gray-100">
+                        <img id="compareResult" src="" class="absolute inset-0 w-full h-full object-contain max-w-none" style="width: 100vw; height: 100%;"> <!-- Hacky width for object-contain alignment -->
+                     </div>
+                     
+                     <!-- Slider Handle -->
+                     <div id="compareHandle" class="absolute top-0 bottom-0 left-1/2 w-1 bg-transparent cursor-ew-resize flex items-center justify-center -ml-6" style="width: 48px;">
+                        <div class="w-10 h-10 bg-acid-yellow border-4 border-black rounded-full flex items-center justify-center shadow-hard">
+                            <i data-lucide="move-horizontal" class="w-6 h-6"></i>
+                        </div>
+                     </div>
+                     
+                     <!-- Close Compare -->
+                     <button id="closeCompareBtn" class="absolute top-4 right-4 z-30 bg-white border-2 border-black p-2 rounded-lg shadow-hard hover:bg-gray-100">
+                        <i data-lucide="x" class="w-6 h-6"></i>
+                     </button>
+                </div>
+
                 <!-- Left: Original (Input) -->
-                <div class="relative w-full md:w-1/2 h-full flex flex-col">
-                    <div class="text-center mb-2 font-display text-xl uppercase">Original / Mask</div>
-                    <div class="flex-1 relative shadow-card border-4 border-black bg-white flex items-center justify-center overflow-hidden p-4" id="canvasContainer">
-                        <div class="relative max-w-full max-h-full">
-                            <!-- The Image to Edit -->
-                            <img id="targetImage" src="https://images.unsplash.com/photo-1563089145-599997674d42?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="max-h-full max-w-full object-contain pointer-events-none select-none block" draggable="false" style="max-height: 60vh;">
-                            
-                            <!-- Drawing Canvas Layer -->
-                            <canvas id="maskCanvas" class="absolute inset-0 w-full h-full cursor-brush touch-none"></canvas>
+                <div class="relative w-full md:w-1/2 h-full flex flex-col transition-all duration-300" id="leftPanel">
+                    <div class="text-center mb-2 font-display text-xl uppercase flex justify-between items-center px-4">
+                        <span>Original / Mask</span>
+                        <button id="resetZoomBtn" class="text-xs font-bold bg-gray-200 px-2 py-1 rounded border border-black hover:bg-white">Reset View</button>
+                    </div>
+                    <div class="flex-1 relative shadow-card border-4 border-black bg-white overflow-hidden p-0" id="canvasContainer">
+                        <!-- Transform Container for Pan/Zoom -->
+                        <div id="zoomLayer" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 origin-center touch-none cursor-crosshair" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                            <div class="relative inline-block" id="imageWrapper">
+                                <!-- The Image to Edit -->
+                                <img id="targetImage" src="https://images.unsplash.com/photo-1563089145-599997674d42?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="max-h-full max-w-full object-contain pointer-events-none select-none block" draggable="false" style="max-height: 60vh;">
+                                
+                                <!-- Drawing Canvas Layer -->
+                                <canvas id="maskCanvas" class="absolute inset-0 w-full h-full touch-none"></canvas>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Right: Result (Output) -->
-                <div class="relative w-full md:w-1/2 h-full flex flex-col">
-                    <div class="text-center mb-2 font-display text-xl uppercase">Result</div>
+                <div class="relative w-full md:w-1/2 h-full flex flex-col transition-all duration-300" id="rightPanel">
+                    <div class="text-center mb-2 font-display text-xl uppercase flex justify-between items-center px-4">
+                        <span>Result</span>
+                        <button id="openCompareBtn" class="text-xs font-bold bg-jungle-green text-acid-yellow px-2 py-1 rounded border border-black hover:bg-black disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                            Compare
+                        </button>
+                    </div>
                     <div class="flex-1 relative shadow-card border-4 border-black bg-white flex items-center justify-center overflow-hidden bg-soft-cream p-4" id="resultContainer">
                         
                         <!-- Placeholder -->
@@ -268,34 +345,152 @@
     <script>
         lucide.createIcons();
 
-        // URL Param Logic to simulate passing image
+        // Mobile Menu Toggle Logic
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeBtn = document.getElementById('close-menu-btn');
+
+        function toggleMenu() {
+            mobileMenu.classList.toggle('translate-x-full');
+        }
+
+        if(menuBtn) menuBtn.addEventListener('click', toggleMenu);
+        if(closeBtn) closeBtn.addEventListener('click', toggleMenu);
+
+        // Mobile Settings Panel Logic
+        const settingsPanel = document.getElementById('settingsPanel');
+        const openSettingsBtn = document.getElementById('openSettingsBtn');
+        const closeSettingsBtn = document.getElementById('closeSettingsBtn');
+
+        function toggleSettings() {
+            settingsPanel.classList.toggle('translate-y-full');
+        }
+        if(openSettingsBtn) openSettingsBtn.addEventListener('click', toggleSettings);
+        if(closeSettingsBtn) closeSettingsBtn.addEventListener('click', toggleSettings);
+
+
+        // URL Param Logic
         const urlParams = new URLSearchParams(window.location.search);
         const imageUrl = urlParams.get('img');
         if(imageUrl) {
             document.getElementById('targetImage').src = imageUrl;
         }
 
-        // Brush Logic
+        // --- Pan & Zoom Logic ---
+        const zoomLayer = document.getElementById('zoomLayer');
+        const canvasContainer = document.getElementById('canvasContainer');
+        const resetZoomBtn = document.getElementById('resetZoomBtn');
+        
+        let scale = 1;
+        let panning = false;
+        let pointX = 0;
+        let pointY = 0;
+        let startX = 0;
+        let startY = 0;
+
+        function setTransform() {
+            zoomLayer.style.transform = `translate(${pointX}px, ${pointY}px) scale(${scale})`;
+            // Center content initially if needed, but using CSS flex centering + translate works
+        }
+
+        // Wheel Zoom
+        canvasContainer.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            const xs = (e.clientX - pointX) / scale;
+            const ys = (e.clientY - pointY) / scale;
+            
+            const delta = -e.deltaY;
+            (delta > 0) ? (scale *= 1.1) : (scale /= 1.1);
+            
+            // Clamp scale
+            scale = Math.min(Math.max(0.5, scale), 5);
+
+            pointX = e.clientX - xs * scale;
+            pointY = e.clientY - ys * scale;
+
+            setTransform();
+        });
+
+        // Pan (Middle Click or Space + Drag - Simplified to Right Click or Meta Key for now)
+        // Let's allow panning if NOT drawing (e.g. if tool is hand, or if using right click)
+        // For simplicity in this demo: Right click to pan, Left click to draw
+        
+        canvasContainer.addEventListener('mousedown', (e) => {
+            if (e.button === 2 || e.metaKey) { // Right click or Cmd+Click to Pan
+                e.preventDefault();
+                startX = e.clientX - pointX;
+                startY = e.clientY - pointY;
+                panning = true;
+                canvasContainer.style.cursor = 'grabbing';
+            }
+        });
+
+        canvasContainer.addEventListener('mousemove', (e) => {
+            if (!panning) return;
+            e.preventDefault();
+            pointX = e.clientX - startX;
+            pointY = e.clientY - startY;
+            setTransform();
+        });
+
+        canvasContainer.addEventListener('mouseup', () => {
+            panning = false;
+            canvasContainer.style.cursor = '';
+        });
+        
+        // Prevent context menu on canvas container
+        canvasContainer.addEventListener('contextmenu', e => e.preventDefault());
+
+        resetZoomBtn.addEventListener('click', () => {
+            scale = 1;
+            pointX = 0;
+            pointY = 0;
+            zoomLayer.style.transform = `translate(-50%, -50%) scale(1)`; // Reset to centered
+            // Note: The CSS transform was origin-center translate(-50%, -50%).
+            // My JS setTransform overwrites it. 
+            // Let's fix the initial state logic.
+            // Actually, let's just reset to style="" to let CSS take over, or specific values.
+            zoomLayer.style.transform = 'translate(-50%, -50%) scale(1)';
+            // Reset internal vars
+            // We need to match the visual state.
+            // Ideally we calculate center offsets. For demo, reload or simple reset is fine.
+            // Let's just reset vars to 0 but keep CSS centering
+            // To make custom pan/zoom work with CSS centering, we usually remove CSS centering and do it in JS,
+            // or append delta to the base CSS transform.
+            // Simplified approach:
+            // JS controls everything. Initial state is center.
+            const rect = canvasContainer.getBoundingClientRect();
+            pointX = rect.width / 2; 
+            pointY = rect.height / 2;
+            // Wait, if I set translate(width/2, height/2) and origin is center...
+            // Let's use a simpler transform model for the demo:
+            // style="transform: translate(px, py) scale(s)"
+            // Initial: translate(0,0) scale(1) but centered via Flexbox?
+            // No, if I use absolute positioning, I need to control X/Y.
+            // Let's stick to the reset button just reloading for now or clearing inline styles
+            zoomLayer.style.transform = '';
+            scale = 1;
+            pointX = 0;
+            pointY = 0;
+        });
+
+
+        // --- Brush Logic (Updated for Transform) ---
         const canvas = document.getElementById('maskCanvas');
         const ctx = canvas.getContext('2d');
         const image = document.getElementById('targetImage');
         let isDrawing = false;
         let brushSize = 40;
-        let mode = 'brush'; // brush or eraser
+        let mode = 'brush';
 
-        // Resize canvas to match image dimensions exactly when image loads
         image.onload = function() {
-            canvas.width = image.clientWidth;
-            canvas.height = image.clientHeight;
-            // Reset context styles after resize
+            canvas.width = image.naturalWidth; // Use natural resolution for better quality
+            canvas.height = image.naturalHeight;
             updateContext();
         };
         
-        // Handle window resize
         window.addEventListener('resize', () => {
-             canvas.width = image.clientWidth;
-             canvas.height = image.clientHeight;
-             updateContext();
+             // No need to resize canvas on window resize if using naturalWidth/Height and CSS scaling
         });
 
         function updateContext() {
@@ -303,7 +498,6 @@
             ctx.lineJoin = 'round';
         }
 
-        // Tools
         document.getElementById('brushSizeSlider').addEventListener('input', (e) => {
             brushSize = e.target.value;
             document.getElementById('brushSizeVal').innerText = brushSize + 'px';
@@ -313,21 +507,39 @@
             mode = 'brush';
             document.getElementById('toolBrush').classList.add('active');
             document.getElementById('toolEraser').classList.remove('active');
+            zoomLayer.classList.add('cursor-crosshair');
         });
 
         document.getElementById('toolEraser').addEventListener('click', (e) => {
             mode = 'eraser';
             document.getElementById('toolEraser').classList.add('active');
             document.getElementById('toolBrush').classList.remove('active');
+            zoomLayer.classList.add('cursor-crosshair');
         });
 
-        // Drawing Events
+        // Drawing Events attached to CANVAS, but coordinates need adjustment
         canvas.addEventListener('mousedown', startDrawing);
         canvas.addEventListener('mousemove', draw);
         canvas.addEventListener('mouseup', stopDrawing);
         canvas.addEventListener('mouseout', stopDrawing);
 
+        function getMousePos(evt) {
+            const rect = canvas.getBoundingClientRect(); 
+            // The canvas rect is already transformed by CSS scale/translate on parent
+            // So clientX/Y relative to rect left/top gives screen pixels on the element
+            // We need to map that to internal canvas pixels.
+            
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
+            
+            return {
+                x: (evt.clientX - rect.left) * scaleX,
+                y: (evt.clientY - rect.top) * scaleY
+            };
+        }
+
         function startDrawing(e) {
+            if (e.button !== 0) return; // Only left click
             isDrawing = true;
             draw(e);
         }
@@ -335,41 +547,39 @@
         function draw(e) {
             if (!isDrawing) return;
             
-            const rect = canvas.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-
-            ctx.lineWidth = brushSize;
+            const pos = getMousePos(e);
+            
+            ctx.lineWidth = brushSize * (canvas.width / image.clientWidth); // Adjust brush size relative to image scale
+            // Simplified brush size scaling
 
             if (mode === 'brush') {
                 ctx.globalCompositeOperation = 'source-over';
-                ctx.strokeStyle = 'rgba(223, 255, 0, 0.5)'; // Acid yellow semi-transparent
+                ctx.strokeStyle = 'rgba(223, 255, 0, 0.5)';
             } else {
                 ctx.globalCompositeOperation = 'destination-out';
                 ctx.strokeStyle = 'rgba(0,0,0,1)';
             }
 
             ctx.beginPath();
-            ctx.moveTo(x, y); // Simply dots for now, better path logic can be added
-            ctx.lineTo(x, y);
+            ctx.moveTo(pos.x, pos.y); // Draw dot
+            ctx.lineTo(pos.x, pos.y);
             ctx.stroke();
             
-            // Simple continuous drawing for simplicity in this demo
             ctx.beginPath();
             ctx.moveTo(lastX, lastY);
-            ctx.lineTo(x, y);
+            ctx.lineTo(pos.x, pos.y);
             ctx.stroke();
             
-            [lastX, lastY] = [x, y];
+            [lastX, lastY] = [pos.x, pos.y];
         }
         
-        // Better mouse tracking
         let lastX = 0;
         let lastY = 0;
         canvas.addEventListener('mousedown', (e) => {
-            const rect = canvas.getBoundingClientRect();
-            lastX = e.clientX - rect.left;
-            lastY = e.clientY - rect.top;
+             if (e.button !== 0) return;
+             const pos = getMousePos(e);
+             lastX = pos.x;
+             lastY = pos.y;
         });
 
         function stopDrawing() {
@@ -379,6 +589,53 @@
         function clearMask() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
         }
+
+        // --- Comparison Slider Logic ---
+        const openCompareBtn = document.getElementById('openCompareBtn');
+        const closeCompareBtn = document.getElementById('closeCompareBtn');
+        const compareContainer = document.getElementById('compareContainer');
+        const compareOverlay = document.getElementById('compareOverlay');
+        const compareHandle = document.getElementById('compareHandle');
+        const compareResult = document.getElementById('compareResult'); // The image inside overlay
+        const compareOriginal = document.getElementById('compareOriginal');
+        
+        let isSliding = false;
+
+        openCompareBtn.addEventListener('click', () => {
+            // Set sources
+            compareOriginal.src = document.getElementById('targetImage').src;
+            compareResult.src = document.getElementById('resultImage').src;
+            
+            // Show overlay
+            compareContainer.classList.remove('hidden');
+            
+            // Reset slider position
+            compareOverlay.style.width = '50%';
+            compareHandle.style.left = '50%';
+            
+            // Ensure internal image width matches container to prevent squishing
+            // We use object-contain on parent, so we need to match that visual size?
+            // Actually, simplified: force both images to cover and sync
+            // For this demo, we'll assume they match aspect ratio.
+        });
+
+        closeCompareBtn.addEventListener('click', () => {
+            compareContainer.classList.add('hidden');
+        });
+
+        compareHandle.addEventListener('mousedown', () => isSliding = true);
+        window.addEventListener('mouseup', () => isSliding = false);
+        
+        compareContainer.addEventListener('mousemove', (e) => {
+            if (!isSliding) return;
+            const rect = compareContainer.getBoundingClientRect();
+            let x = e.clientX - rect.left;
+            x = Math.max(0, Math.min(x, rect.width));
+            const percent = (x / rect.width) * 100;
+            
+            compareOverlay.style.width = percent + '%';
+            compareHandle.style.left = percent + '%';
+        });
 
         // Generate Logic
         document.getElementById('generateFillBtn').addEventListener('click', () => {
@@ -397,9 +654,11 @@
                 resultImg.classList.remove('hidden');
                 resultImg.classList.add('animate__animated', 'animate__fadeIn');
                 
-                // Simulating a result (using a different image for demo)
-                // In a real app, this would be the processed image from the backend
+                // Simulating a result
                 resultImg.src = "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80";
+                
+                // Enable Compare
+                openCompareBtn.disabled = false;
                 
                 // Clear the mask on the source
                 clearMask();
