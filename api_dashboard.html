@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mika | Developer Console</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;900&family=Inter:wght@400;700;900&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'acid-yellow': '#DFFF00',
+                        'jungle-green': '#00684A',
+                        'soft-cream': '#FFFDF5',
+                        'monster-purple': '#9D4EDD',
+                        'hot-pink': '#FF0099',
+                    },
+                    fontFamily: {
+                        'display': ['"Poppins"', 'sans-serif'],
+                        'body': ['"Inter"', 'sans-serif'],
+                        'mono': ['"Fira Code"', 'monospace'],
+                    },
+                    boxShadow: {
+                        'hard': '5px 5px 0px 0px #000000',
+                        'hard-hover': '2px 2px 0px 0px #000000',
+                        'card': '8px 8px 0px 0px #000000',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .doodle-bg {
+            background-image: radial-gradient(#000 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+    </style>
+</head>
+<body class="bg-soft-cream font-body text-black overflow-x-hidden">
+
+    <!-- Top Navigation -->
+    <nav class="fixed w-full top-0 z-50 border-b-4 border-black bg-acid-yellow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center gap-2 cursor-pointer group hover:scale-105 transition-transform">
+                    <span class="font-display text-4xl tracking-widest uppercase italic" style="text-shadow: 3px 3px 0px #FFF;">Mika <span class="text-xl not-italic">/ Dev</span></span>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8 font-bold text-lg">
+                    <a href="api_dashboard.html" class="border-b-4 border-black pb-1">Dashboard</a>
+                    <a href="api_keys.html" class="hover:text-jungle-green hover:underline decoration-4 decoration-jungle-green underline-offset-4">API Keys</a>
+                    <a href="api_docs.html" class="hover:text-jungle-green hover:underline decoration-4 decoration-jungle-green underline-offset-4">Docs</a>
+                    <a href="profile.html" class="w-10 h-10 rounded-full bg-monster-purple border-2 border-black overflow-hidden hover:scale-110 transition-transform">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="User" class="w-full h-full object-cover">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-32 pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Page Header -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6">
+            <div>
+                <h1 class="font-display text-5xl mb-2">Console Dashboard</h1>
+                <p class="text-xl font-bold text-gray-500">Monitor your API usage and system status.</p>
+            </div>
+            <a href="api_keys.html" class="brutal-btn bg-black text-white px-6 py-3 rounded-xl border-2 border-black font-bold shadow-hard hover:bg-gray-800 flex items-center gap-2">
+                <i data-lucide="key" class="w-5 h-5"></i> Manage Keys
+            </a>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            <!-- Stat 1 -->
+            <div class="bg-white border-4 border-black rounded-2xl p-6 shadow-card relative overflow-hidden group">
+                <div class="absolute -right-6 -top-6 bg-acid-yellow w-24 h-24 rounded-full border-4 border-black group-hover:scale-125 transition-transform"></div>
+                <div class="relative z-10">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="font-bold text-gray-500 uppercase tracking-wider">Total Requests</span>
+                        <i data-lucide="activity" class="w-6 h-6 text-black"></i>
+                    </div>
+                    <div class="font-display text-5xl mb-2">142.5k</div>
+                    <div class="font-bold text-green-600 flex items-center gap-1 text-sm">
+                        <i data-lucide="trending-up" class="w-4 h-4"></i> +12% this month
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stat 2 -->
+            <div class="bg-white border-4 border-black rounded-2xl p-6 shadow-card relative overflow-hidden group">
+                <div class="absolute -right-6 -top-6 bg-monster-purple w-24 h-24 rounded-full border-4 border-black group-hover:scale-125 transition-transform"></div>
+                <div class="relative z-10">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="font-bold text-gray-500 uppercase tracking-wider">Avg Latency</span>
+                        <i data-lucide="zap" class="w-6 h-6 text-black"></i>
+                    </div>
+                    <div class="font-display text-5xl mb-2">245ms</div>
+                    <div class="font-bold text-gray-500 text-sm">P95 Response Time</div>
+                </div>
+            </div>
+
+            <!-- Stat 3 -->
+            <div class="bg-white border-4 border-black rounded-2xl p-6 shadow-card relative overflow-hidden group">
+                <div class="absolute -right-6 -top-6 bg-jungle-green w-24 h-24 rounded-full border-4 border-black group-hover:scale-125 transition-transform"></div>
+                <div class="relative z-10">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="font-bold text-gray-500 uppercase tracking-wider">Error Rate</span>
+                        <i data-lucide="alert-triangle" class="w-6 h-6 text-black"></i>
+                    </div>
+                    <div class="font-display text-5xl mb-2 text-black">0.04%</div>
+                    <div class="font-bold text-green-600 text-sm">System Healthy</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activity & Usage Chart -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Chart Area -->
+            <div class="lg:col-span-2 bg-white border-4 border-black rounded-2xl p-8 shadow-card">
+                <h3 class="font-display text-2xl mb-6 flex items-center gap-2">
+                    <i data-lucide="bar-chart-2" class="w-6 h-6"></i> 
+                    Traffic Overview (30 Days)
+                </h3>
+                <!-- Placeholder for Chart -->
+                <div class="h-64 w-full bg-soft-cream border-2 border-black border-dashed rounded-xl flex items-center justify-center relative overflow-hidden">
+                     <!-- Faking a chart with CSS bars -->
+                     <div class="flex items-end justify-between w-full h-full px-8 pb-4 gap-2 pt-12">
+                        <div class="w-full bg-monster-purple border-2 border-black rounded-t-md h-[40%]"></div>
+                        <div class="w-full bg-acid-yellow border-2 border-black rounded-t-md h-[60%]"></div>
+                        <div class="w-full bg-jungle-green border-2 border-black rounded-t-md h-[30%]"></div>
+                        <div class="w-full bg-monster-purple border-2 border-black rounded-t-md h-[80%]"></div>
+                        <div class="w-full bg-acid-yellow border-2 border-black rounded-t-md h-[50%]"></div>
+                        <div class="w-full bg-jungle-green border-2 border-black rounded-t-md h-[75%]"></div>
+                        <div class="w-full bg-monster-purple border-2 border-black rounded-t-md h-[45%]"></div>
+                     </div>
+                </div>
+            </div>
+
+            <!-- Recent Logs -->
+            <div class="bg-white border-4 border-black rounded-2xl p-8 shadow-card">
+                <h3 class="font-display text-2xl mb-6 flex items-center gap-2">
+                    <i data-lucide="list" class="w-6 h-6"></i> 
+                    Recent Requests
+                </h3>
+                <div class="space-y-4">
+                    <!-- Log Item -->
+                    <div class="flex items-center justify-between p-3 border-2 border-black rounded-lg bg-soft-cream hover:bg-white transition-colors">
+                        <div class="flex items-center gap-3">
+                            <span class="px-2 py-1 bg-green-200 text-green-800 text-xs font-bold border border-black rounded font-mono">200</span>
+                            <span class="font-mono text-sm font-bold">POST /generate</span>
+                        </div>
+                        <span class="text-xs font-bold text-gray-500">2m ago</span>
+                    </div>
+                    <!-- Log Item -->
+                    <div class="flex items-center justify-between p-3 border-2 border-black rounded-lg bg-soft-cream hover:bg-white transition-colors">
+                        <div class="flex items-center gap-3">
+                            <span class="px-2 py-1 bg-green-200 text-green-800 text-xs font-bold border border-black rounded font-mono">200</span>
+                            <span class="font-mono text-sm font-bold">GET /models</span>
+                        </div>
+                        <span class="text-xs font-bold text-gray-500">5m ago</span>
+                    </div>
+                    <!-- Log Item -->
+                    <div class="flex items-center justify-between p-3 border-2 border-black rounded-lg bg-soft-cream hover:bg-white transition-colors">
+                        <div class="flex items-center gap-3">
+                            <span class="px-2 py-1 bg-red-200 text-red-800 text-xs font-bold border border-black rounded font-mono">401</span>
+                            <span class="font-mono text-sm font-bold">POST /upscale</span>
+                        </div>
+                        <span class="text-xs font-bold text-gray-500">12m ago</span>
+                    </div>
+                     <!-- Log Item -->
+                     <div class="flex items-center justify-between p-3 border-2 border-black rounded-lg bg-soft-cream hover:bg-white transition-colors">
+                        <div class="flex items-center gap-3">
+                            <span class="px-2 py-1 bg-green-200 text-green-800 text-xs font-bold border border-black rounded font-mono">200</span>
+                            <span class="font-mono text-sm font-bold">GET /tasks/123</span>
+                        </div>
+                        <span class="text-xs font-bold text-gray-500">15m ago</span>
+                    </div>
+                </div>
+                <a href="#" class="block text-center font-bold mt-6 text-gray-500 hover:text-black underline decoration-2 underline-offset-4">View Full Logs</a>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mika | API Keys</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;900&family=Inter:wght@400;700;900&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'acid-yellow': '#DFFF00',
+                        'jungle-green': '#00684A',
+                        'soft-cream': '#FFFDF5',
+                        'monster-purple': '#9D4EDD',
+                        'hot-pink': '#FF0099',
+                    },
+                    fontFamily: {
+                        'display': ['"Poppins"', 'sans-serif'],
+                        'body': ['"Inter"', 'sans-serif'],
+                        'mono': ['"Fira Code"', 'monospace'],
+                    },
+                    boxShadow: {
+                        'hard': '5px 5px 0px 0px #000000',
+                        'hard-hover': '2px 2px 0px 0px #000000',
+                        'card': '8px 8px 0px 0px #000000',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-soft-cream font-body text-black overflow-x-hidden">
+
+    <!-- Top Navigation -->
+    <nav class="fixed w-full top-0 z-50 border-b-4 border-black bg-acid-yellow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center gap-2 cursor-pointer group hover:scale-105 transition-transform">
+                    <span class="font-display text-4xl tracking-widest uppercase italic" style="text-shadow: 3px 3px 0px #FFF;">Mika <span class="text-xl not-italic">/ Dev</span></span>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8 font-bold text-lg">
+                    <a href="api_dashboard.html" class="hover:text-jungle-green hover:underline decoration-4 decoration-jungle-green underline-offset-4">Dashboard</a>
+                    <a href="api_keys.html" class="border-b-4 border-black pb-1">API Keys</a>
+                    <a href="api_docs.html" class="hover:text-jungle-green hover:underline decoration-4 decoration-jungle-green underline-offset-4">Docs</a>
+                    <a href="profile.html" class="w-10 h-10 rounded-full bg-monster-purple border-2 border-black overflow-hidden hover:scale-110 transition-transform">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="User" class="w-full h-full object-cover">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-32 pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6">
+            <div>
+                <h1 class="font-display text-5xl mb-2">API Credentials</h1>
+                <p class="text-xl font-bold text-gray-500">Manage your secure access tokens.</p>
+            </div>
+            <button onclick="showCreateModal()" class="brutal-btn bg-jungle-green text-acid-yellow px-6 py-3 rounded-xl border-2 border-black font-bold shadow-hard hover:shadow-hard-hover flex items-center gap-2">
+                <i data-lucide="plus" class="w-5 h-5"></i> Create New Key
+            </button>
+        </div>
+
+        <!-- Keys List -->
+        <div class="bg-white border-4 border-black rounded-2xl shadow-card overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead class="bg-gray-100 border-b-4 border-black">
+                        <tr>
+                            <th class="p-6 font-display text-lg">Name</th>
+                            <th class="p-6 font-display text-lg">Key Prefix</th>
+                            <th class="p-6 font-display text-lg">Created</th>
+                            <th class="p-6 font-display text-lg">Last Used</th>
+                            <th class="p-6 font-display text-lg text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y-2 divide-black">
+                        <!-- Key Item 1 -->
+                        <tr class="hover:bg-soft-cream transition-colors">
+                            <td class="p-6 font-bold">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 bg-monster-purple rounded-lg border-2 border-black flex items-center justify-center">
+                                        <i data-lucide="box" class="w-5 h-5 text-white"></i>
+                                    </div>
+                                    Production App
+                                </div>
+                            </td>
+                            <td class="p-6 font-mono text-gray-600 bg-gray-50 rounded m-2 inline-block border border-gray-200">mika_prod_...8f2a</td>
+                            <td class="p-6 font-bold text-gray-500">Oct 24, 2023</td>
+                            <td class="p-6 font-bold text-green-600">Just now</td>
+                            <td class="p-6 text-right">
+                                <div class="flex justify-end gap-2">
+                                    <button class="p-2 border-2 border-black rounded bg-white hover:bg-gray-100" title="Copy Key">
+                                        <i data-lucide="copy" class="w-4 h-4"></i>
+                                    </button>
+                                    <button class="p-2 border-2 border-black rounded bg-white hover:bg-red-100 text-red-600" title="Revoke">
+                                        <i data-lucide="trash-2" class="w-4 h-4"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- Key Item 2 -->
+                        <tr class="hover:bg-soft-cream transition-colors">
+                            <td class="p-6 font-bold">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 bg-acid-yellow rounded-lg border-2 border-black flex items-center justify-center">
+                                        <i data-lucide="flask-conical" class="w-5 h-5 text-black"></i>
+                                    </div>
+                                    Test Environment
+                                </div>
+                            </td>
+                            <td class="p-6 font-mono text-gray-600 bg-gray-50 rounded m-2 inline-block border border-gray-200">mika_test_...b91c</td>
+                            <td class="p-6 font-bold text-gray-500">Nov 01, 2023</td>
+                            <td class="p-6 font-bold text-gray-400">2 days ago</td>
+                            <td class="p-6 text-right">
+                                <div class="flex justify-end gap-2">
+                                    <button class="p-2 border-2 border-black rounded bg-white hover:bg-gray-100" title="Copy Key">
+                                        <i data-lucide="copy" class="w-4 h-4"></i>
+                                    </button>
+                                    <button class="p-2 border-2 border-black rounded bg-white hover:bg-red-100 text-red-600" title="Revoke">
+                                        <i data-lucide="trash-2" class="w-4 h-4"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Create Key Modal -->
+    <div id="createModal" class="fixed inset-0 bg-black/50 z-[60] hidden flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white w-full max-w-md border-4 border-black rounded-2xl shadow-hard p-8 relative animate__animated animate__zoomIn">
+            <button onclick="hideCreateModal()" class="absolute top-4 right-4 p-1 hover:bg-gray-100 rounded border border-transparent hover:border-black">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            
+            <h2 class="font-display text-3xl mb-6">Create New Key</h2>
+            
+            <div class="space-y-6">
+                <div>
+                    <label class="block font-bold mb-2">Key Name</label>
+                    <input type="text" placeholder="e.g., My Awesome App" class="w-full p-3 border-4 border-black rounded-xl font-bold focus:bg-acid-yellow focus:outline-none transition-colors">
+                </div>
+                
+                <div>
+                    <label class="block font-bold mb-2">Permissions</label>
+                    <div class="space-y-2">
+                        <label class="flex items-center gap-3 p-3 border-2 border-black rounded-lg cursor-pointer hover:bg-soft-cream">
+                            <input type="checkbox" checked class="w-5 h-5 border-2 border-black rounded text-black focus:ring-0">
+                            <span class="font-bold">Read Access</span>
+                        </label>
+                        <label class="flex items-center gap-3 p-3 border-2 border-black rounded-lg cursor-pointer hover:bg-soft-cream">
+                            <input type="checkbox" checked class="w-5 h-5 border-2 border-black rounded text-black focus:ring-0">
+                            <span class="font-bold">Generate Images</span>
+                        </label>
+                    </div>
+                </div>
+
+                <button onclick="generateKey()" class="w-full bg-black text-white py-3 rounded-xl font-bold text-lg hover:bg-gray-800 border-2 border-black">
+                    Generate Key
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        function showCreateModal() {
+            const modal = document.getElementById('createModal');
+            modal.classList.remove('hidden');
+        }
+
+        function hideCreateModal() {
+            const modal = document.getElementById('createModal');
+            modal.classList.add('hidden');
+        }
+
+        function generateKey() {
+            alert("This would generate a new API key in the backend!");
+            hideCreateModal();
+        }
+    </script>
+</body>
+</html>
+
